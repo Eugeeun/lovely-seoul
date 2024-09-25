@@ -1,5 +1,3 @@
-// DataDisplay.stories.js
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import useFetch from '../../hooks/useFetch';
