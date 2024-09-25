@@ -52,25 +52,25 @@ $font-family-span: 'Noto Sans KR', sans-serif;
 
 h2 {
   font-family: $font-family-h2;
-  font-size: $font-size-h2;
+  font-size: $font-size-extra-large;
   font-weight: $font-weight-bold;
 }
 
 h3 {
   font-family: $font-family-h3;
-  font-size: $font-size-h3;
+  font-size: $font-size-large;
   font-weight: $font-weight-regular;
 }
 
 p {
   font-family: $font-family-p;
-  font-size: $font-size-p;
+  font-size: $font-size-medium;
   font-weight: $font-weight-thin;
 }
 
 span {
   font-family: $font-family-span;
-  font-size: $font-size-span;
+  font-size: $font-size-micro;
   font-weight: $font-weight-thin;
 }
 
