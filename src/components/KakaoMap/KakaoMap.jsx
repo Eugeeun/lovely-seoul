@@ -8,20 +8,12 @@ import useStore from '../../store';
 import Popup from '../Popup/Popup';
 import ky from 'ky';
 import PopupEvent from '../Popup/PopupEvent';
+import PlaceMarker from '../PlaceMarker/PlaceMarker';
+import EventMarker from '../EventMarker/EventMarker';
 
 const centerOfSeoul = {
   lat: 37.5665,
   lng: 126.978,
-};
-
-const markerImage = {
-  src: '/place-pin.png',
-  size: { width: 28, height: 35 },
-};
-
-const markerImage2 = {
-  src: '/event-pin.png',
-  size: { width: 28, height: 35 },
 };
 
 const KakaoMap = ({ placeLists }) => {
@@ -77,24 +69,12 @@ const KakaoMap = ({ placeLists }) => {
     <div>
       <Map center={center} level={level} className={styles.kakoMap} onClick={handleMapClick}>
         {placeLists.map((marker, i) => (
-          <MapMarker
-            key={i}
-            position={{ lat: marker.x, lng: marker.y }}
-            title={marker.area_nm}
-            image={markerImage}
-            onClick={() => handlePlaceMarkerClick(marker)}
-          />
+          <PlaceMarker key={i} marker={marker} onClick={() => handlePlaceMarkerClick(marker)} />
         ))}
 
         {placeDetailInfo &&
           placeDetailInfo['EVENT_STTS'].map((marker, i) => (
-            <MapMarker
-              key={i}
-              position={{ lat: marker.EVENT_Y, lng: marker.EVENT_X }}
-              title={marker.EVENT_NM}
-              image={markerImage2}
-              onClick={() => handleEventMarkerClick(marker)}
-            />
+            <EventMarker key={i} marker={marker} onClick={() => handleEventMarkerClick(marker)} />
           ))}
 
         {selectedPlace && (
