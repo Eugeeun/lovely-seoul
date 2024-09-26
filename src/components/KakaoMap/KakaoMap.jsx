@@ -4,6 +4,7 @@ import styles from './KakaoMap.module.scss';
 import zoomInImage from '/zoom-in.svg';
 import zoomOutImage from '/zoom-out.svg';
 import PropTypes from 'prop-types';
+import useStore from '../../store';
 
 const centerOfSeoul = {
   lat: 37.5665,
@@ -20,8 +21,7 @@ const markerImage = {
 
 const KakaoMap = ({ placeLists }) => {
   const [level, setLevel] = useState(8);
-  const [selectedMarker, setSelectedMarker] = useState(null);
-  // TODO: Zustand로 선택된 마커를 전역으로 관리
+  const { selectedMarker, setSelectedMarker, clearSelectedMarker } = useStore();
   const [center, setCenter] = useState(centerOfSeoul);
 
   const zoomIn = () => {
@@ -39,7 +39,7 @@ const KakaoMap = ({ placeLists }) => {
   };
 
   const handleOverlayClose = () => {
-    setSelectedMarker(null);
+    clearSelectedMarker();
   };
 
   return (
