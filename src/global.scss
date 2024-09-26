@@ -19,7 +19,7 @@ $black-color: #333333; // 검은색
 $white-color: #ffffff;
 
 // shadow
-$box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); // 그림자 설정
+$box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); // 그림자 설정
 
 // radius
 $border-radius-default: 20px; // 기본
@@ -41,7 +41,8 @@ $font-size-small: 14px;
 $font-size-micro: 12px;
 
 // font-weight
-$font-weight-bold: 900;
+$font-weight-bolder: 900;
+$font-weight-bold: 600;
 $font-weight-regular: 400;
 $font-weight-thin: 300;
 
@@ -54,7 +55,7 @@ $font-family-span: 'Noto Sans KR', sans-serif;
 h2 {
   font-family: $font-family-h2;
   font-size: $font-size-extra-large;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-bolder;
 }
 
 h3 {
@@ -77,5 +78,5 @@ span {
 
 strong {
   color: $primary-color;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-bolder;
 }
