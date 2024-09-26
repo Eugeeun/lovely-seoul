@@ -1,47 +1,29 @@
 import { useState } from 'react';
-import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { Map, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import styles from './KakaoMap.module.scss';
 import zoomInImage from '/zoom-in.svg';
 import zoomOutImage from '/zoom-out.svg';
 import PropTypes from 'prop-types';
 import useStore from '../../store';
 import Popup from '../Popup/Popup';
-import ky from 'ky';
 import PopupEvent from '../Popup/PopupEvent';
 import PlaceMarker from '../PlaceMarker/PlaceMarker';
 import EventMarker from '../EventMarker/EventMarker';
-
-const centerOfSeoul = {
-  lat: 37.5665,
-  lng: 126.978,
-};
+import useEventLists from '../../hooks/useEventLists';
 
 const KakaoMap = ({ placeLists }) => {
   const [level, setLevel] = useState(6);
+
+  const [center, setCenter] = useState({
+    lat: 37.5665,
+    lng: 126.978,
+  });
   const { selectedPlace, setSelectedPlace, clearSelectedPlace } = useStore();
-  const [center, setCenter] = useState(centerOfSeoul);
-  const { placeDetailInfo, setPlaceDetailInfo } = useStore();
   const { selectedEvent, setSelectedEvent, clearSelectedEvent } = useStore();
+  const { placeDetailInfo, fetchEventLists } = useEventLists();
 
-  const zoomIn = () => {
-    setLevel(prevLevel => Math.max(prevLevel - 1, 1));
-  };
-
-  const zoomOut = () => {
-    setLevel(prevLevel => Math.min(prevLevel + 1, 14));
-  };
-
-  const fetchEventLists = async marker => {
-    const apiUrl = `http://openapi.seoul.go.kr:8088/${
-      import.meta.env.VITE_CITY_DATA_API_KEY
-    }/json/citydata/1/5/${marker.area_nm}`;
-    try {
-      const data = await ky.get(apiUrl).json();
-      setPlaceDetailInfo(data['CITYDATA']);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  const zoomIn = () => setLevel(prevLevel => Math.max(prevLevel - 1, 1));
+  const zoomOut = () => setLevel(prevLevel => Math.min(prevLevel + 1, 14));
 
   const handlePlaceMarkerClick = marker => {
     clearSelectedEvent();
@@ -51,19 +33,7 @@ const KakaoMap = ({ placeLists }) => {
     fetchEventLists(marker);
   };
 
-  const handleOverlayClose = () => {
-    clearSelectedPlace();
-  };
-
-  const handleEventMarkerClick = marker => {
-    setSelectedEvent(marker);
-  };
-
-  const handleMapClick = e => {
-    if (selectedEvent) {
-      clearSelectedEvent();
-    }
-  };
+  const handleMapClick = () => selectedEvent && clearSelectedEvent();
 
   return (
     <div>
@@ -72,14 +42,13 @@ const KakaoMap = ({ placeLists }) => {
           <PlaceMarker key={i} marker={marker} onClick={() => handlePlaceMarkerClick(marker)} />
         ))}
 
-        {placeDetailInfo &&
-          placeDetailInfo['EVENT_STTS'].map((marker, i) => (
-            <EventMarker key={i} marker={marker} onClick={() => handleEventMarkerClick(marker)} />
-          ))}
+        {placeDetailInfo?.EVENT_STTS.map((marker, i) => (
+          <EventMarker key={i} marker={marker} onClick={() => setSelectedEvent(marker)} />
+        ))}
 
         {selectedPlace && (
           <CustomOverlayMap position={{ lat: selectedPlace.x, lng: selectedPlace.y }}>
-            <Popup title={selectedPlace.area_nm} handleClose={handleOverlayClose} />
+            <Popup title={selectedPlace.area_nm} handleClose={clearSelectedPlace} />
           </CustomOverlayMap>
         )}
 
