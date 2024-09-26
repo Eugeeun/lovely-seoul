@@ -5,6 +5,7 @@ import zoomInImage from '/zoom-in.svg';
 import zoomOutImage from '/zoom-out.svg';
 import PropTypes from 'prop-types';
 import useStore from '../../store';
+import Popup from '../Popup/Popup';
 
 const centerOfSeoul = {
   lat: 37.5665,
@@ -57,11 +58,7 @@ const KakaoMap = ({ placeLists }) => {
 
         {selectedMarker && (
           <CustomOverlayMap position={{ lat: selectedMarker.x, lng: selectedMarker.y }}>
-            {/* // TODO: 아랫부분을 컴포넌트로 만들기 */}
-            <div>
-              <h4>{selectedMarker.area_nm}</h4>
-              <button onClick={handleOverlayClose}>닫기</button>
-            </div>
+            <Popup title={selectedMarker.area_nm} handleClose={handleOverlayClose} />
           </CustomOverlayMap>
         )}
       </Map>
