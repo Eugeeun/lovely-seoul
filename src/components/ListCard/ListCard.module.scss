@@ -1,0 +1,117 @@
+@use '../../global.scss' as *;
+
+.listCard {
+  display: flex;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius-default;
+  padding: $padding-thicker;
+  gap: $padding-default;
+
+  .listCardImg {
+    width: 250px;
+    position: relative;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .detailInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title {
+      color: $black-color;
+    }
+
+    .location {
+      display: flex;
+      gap: $padding-thin;
+      align-items: center;
+
+      .locationIcon {
+        width: 14px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .desc {
+      font-size: $font-size-micro;
+      color: $gray-color;
+      font-weight: $font-weight-regular;
+    }
+
+    .genderRatio {
+      display: flex;
+      gap: $padding-default;
+
+      .maleRatio {
+        display: flex;
+        align-items: center;
+        gap: $padding-thin;
+
+        .maleIcon {
+          border-radius: $border-radius-thin;
+          width: 34px;
+          height: 34px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        span {
+          font-weight: $font-weight-regular;
+          font-size: $font-size-small;
+        }
+      }
+
+      .femaleRatio {
+        display: flex;
+        align-items: center;
+        gap: $padding-thin;
+
+        .femaleIcon {
+          border-radius: $border-radius-thin;
+          width: 34px;
+          height: 34px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        span {
+          font-weight: $font-weight-regular;
+          font-size: $font-size-small;
+        }
+      }
+    }
+
+    .conditionCon {
+      display: flex;
+      gap: $padding-default;
+
+      span {
+        border-radius: $border-radius-default;
+        padding: $padding-thin;
+        background-color: $gray-color;
+        color: $white-color;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-small;
+      }
+
+      .density {
+      }
+    }
+  }
+}
