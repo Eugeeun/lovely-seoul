@@ -1,0 +1,16 @@
+@use './global.scss' as *;
+
+.app {
+  display: flex;
+  gap: $padding-default;
+
+  .cardLists {
+    width: 40%;
+    height: 100vh;
+    overflow: scroll;
+  }
+
+  .kakaoMapCon {
+    width: 60%;
+  }
+}
