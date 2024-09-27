@@ -57,7 +57,7 @@ ListCard.propTypes = {
     }).isRequired,
     area_congest_lvl: PropTypes.string.isRequired,
   }).isRequired,
-  age: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
 };
 
 export default ListCard;
