@@ -12,10 +12,10 @@ const useStore = create(set => ({
   setSelectedEvent: marker => set({ selectedEvent: marker }),
   clearSelectedEvent: () => set({ selectedEvent: null }),
 
-  detailedPlaceLists: [],
+  hotPlaceLists: [],
   loading: false,
   error: null,
-  setDetailedPlaceLists: lists => set({ detailedPlaceLists: lists }),
+  setHotPlaceLists: lists => set({ hotPlaceLists: lists }),
   setLoading: loading => set({ loading }),
   setError: error => set({ error }),
 }));
