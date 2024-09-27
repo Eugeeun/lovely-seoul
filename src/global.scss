@@ -52,31 +52,31 @@ $font-family-h3: 'Do Hyeon', sans-serif;
 $font-family-p: 'Noto Sans KR', sans-serif;
 $font-family-span: 'Noto Sans KR', sans-serif;
 
-h2 {
+@mixin h2-styles {
   font-family: $font-family-h2;
   font-size: $font-size-extra-large;
   font-weight: $font-weight-bolder;
 }
 
-h3 {
+@mixin h3-styles {
   font-family: $font-family-h3;
   font-size: $font-size-large;
   font-weight: $font-weight-regular;
 }
 
-p {
+@mixin p-styles {
   font-family: $font-family-p;
   font-size: $font-size-medium;
   font-weight: $font-weight-thin;
 }
 
-span {
+@mixin span-styles {
   font-family: $font-family-span;
   font-size: $font-size-micro;
   font-weight: $font-weight-thin;
 }
 
-strong {
+@mixin strong-styles {
   color: $primary-color;
   font-weight: $font-weight-bolder;
 }
