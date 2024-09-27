@@ -6,13 +6,16 @@
   border-radius: $border-radius-default;
   padding: $padding-thicker;
   gap: $padding-default;
+  justify-content: space-between;
 
   .listCardImg {
     width: 250px;
+    height: 200px;
     position: relative;
 
     img {
       width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: $border-radius-default;
     }
@@ -22,6 +25,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: $padding-thin;
+    width: 350px;
 
     .title {
       color: $black-color;
