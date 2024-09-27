@@ -1,8 +1,42 @@
-# React + Vite
+# 진행 상황
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 2024.09.27
 
-Currently, two official plugins are available:
+### [완료]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### 카카오 지도 컴포넌트
+
+0. 전체 장소 데이터 패치
+1. 지도 표시
+2. 마커 표시
+
+   - 장소 마커
+   - 문화 행사 마커
+
+3. 팝업 표시
+
+   - 장소 마커
+   - 문화 행사 마커
+
+#### 핫플 리스트
+
+1. 리스트 컴포넌트
+2. 데이터 가공
+   - 전체 데이터에 연령별 인구 추가
+   - 전체 데이터에 주소명 추가
+3. 연령별 핫플 추출
+4. 리스트 컴포넌트에 데이터 바인딩
+
+### [TODO]
+
+#### 디테일 리스트 컴포넌트
+
+#### 문화 행사 리스트 컴포넌트
+
+#### 리스트 전환 버튼 컴포넌트
+
+#### Welcome 메세지 컴포넌트
+
+#### 로그인 컴포넌트
+
+#### 헤더 컴포넌트
