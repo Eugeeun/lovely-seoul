@@ -25,6 +25,7 @@
 
     .title {
       color: $black-color;
+      @include h3-styles;
     }
 
     .location {
@@ -39,9 +40,13 @@
           width: 100%;
         }
       }
+      p {
+        @include p-styles;
+      }
     }
 
     .desc {
+      @include span-styles;
       font-size: $font-size-micro;
       color: $gray-color;
       font-weight: $font-weight-regular;
@@ -70,6 +75,7 @@
         }
 
         span {
+          @include span-styles;
           font-weight: $font-weight-regular;
           font-size: $font-size-small;
         }
@@ -92,6 +98,7 @@
         }
 
         span {
+          @include span-styles;
           font-weight: $font-weight-regular;
           font-size: $font-size-small;
         }
@@ -103,6 +110,7 @@
       gap: $padding-default;
 
       span {
+        @include span-styles;
         border-radius: $border-radius-default;
         padding: $padding-thin;
         background-color: $gray-color;
