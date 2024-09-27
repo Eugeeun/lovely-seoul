@@ -11,6 +11,13 @@ const useStore = create(set => ({
   selectedEvent: null,
   setSelectedEvent: marker => set({ selectedEvent: marker }),
   clearSelectedEvent: () => set({ selectedEvent: null }),
+
+  detailedPlaceLists: [],
+  loading: false,
+  error: null,
+  setDetailedPlaceLists: lists => set({ detailedPlaceLists: lists }),
+  setLoading: loading => set({ loading }),
+  setError: error => set({ error }),
 }));
 
 export default useStore;
