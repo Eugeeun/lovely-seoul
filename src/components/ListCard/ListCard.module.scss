@@ -14,6 +14,7 @@
     img {
       width: 100%;
       object-fit: cover;
+      border-radius: $border-radius-default;
     }
   }
 
@@ -111,6 +112,39 @@
       }
 
       .density {
+        &.density1 {
+          background-color: $quiet-color;
+        }
+        &.density2 {
+          background-color: $normal-color;
+        }
+        &.density3 {
+          background-color: $crowded-color;
+        }
+        &.density4 {
+          background-color: $very-crowded-color;
+        }
+      }
+
+      .age {
+        &.age10 {
+          background-color: $teenagers-color;
+        }
+        &.age20 {
+          background-color: $twenties-color;
+        }
+        &.age30 {
+          background-color: $thirties-color;
+        }
+        &.age40 {
+          background-color: $forties-color;
+        }
+        &.age50 {
+          background-color: $fifties-color;
+        }
+        &.age60 {
+          background-color: $sixties-color;
+        }
       }
     }
   }
