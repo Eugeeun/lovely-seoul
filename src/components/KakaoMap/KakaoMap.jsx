@@ -33,11 +33,9 @@ const KakaoMap = ({ placeLists }) => {
     fetchEventLists(marker);
   };
 
-  const handleMapClick = () => selectedEvent && clearSelectedEvent();
-
   return (
     <div>
-      <Map center={center} level={level} className={styles.kakoMap} onClick={handleMapClick}>
+      <Map center={center} level={level} className={styles.kakoMap}>
         {placeLists.map((marker, i) => (
           <PlaceMarker key={i} marker={marker} onClick={() => handlePlaceMarkerClick(marker)} />
         ))}
@@ -54,7 +52,7 @@ const KakaoMap = ({ placeLists }) => {
 
         {selectedEvent && (
           <CustomOverlayMap position={{ lat: selectedEvent.EVENT_Y, lng: selectedEvent.EVENT_X }}>
-            <PopupEvent info={selectedEvent} />
+            <PopupEvent info={selectedEvent} handleClose={clearSelectedEvent} />
           </CustomOverlayMap>
         )}
       </Map>
