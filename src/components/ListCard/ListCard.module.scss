@@ -1,12 +1,25 @@
 @use '../../global.scss' as *;
 
-.listCard {
+@mixin list-style {
   display: flex;
   box-shadow: $box-shadow;
   border-radius: $border-radius-default;
-  padding: $padding-thicker;
   gap: $padding-default;
   justify-content: space-between;
+}
+
+.detailListCard {
+  @include list-style();
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $black-color;
+}
+
+.listCard {
+  @include list-style();
+  padding: $padding-thicker;
+  width: 100%;
 
   .listCardImg {
     width: 250px;
@@ -160,5 +173,20 @@
         }
       }
     }
+  }
+}
+
+.leastTime {
+  background-color: #d3d3d3;
+  width: 100%;
+  text-align: center;
+  padding: $padding-default;
+  border-radius: $border-radius-default;
+  font-family: $font-family-p;
+  font-size: $font-size-extra-large;
+  font-weight: $font-weight-bold;
+
+  strong {
+    @include strong-styles;
   }
 }
