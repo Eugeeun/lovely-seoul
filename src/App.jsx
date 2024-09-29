@@ -5,8 +5,9 @@ import useMaxVisitPlaces from './hooks/useMaxVisitPlaces'; // 커스텀 훅 임�
 import useStore from './store'; // Zustand 스토어 임포트
 import data from '../data.json';
 import { useEffect } from 'react';
-import ListCard from './components/ListCard/ListCard';
 import styles from './App.module.scss';
+import DetailListCard from './components/ListCard/DetailListCard';
+import EventListCard from './components/ListCard/EventListCard';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
@@ -14,6 +15,7 @@ const getAllPlaceListUrl =
 function App() {
   const { data: placeLists, error, isLoading } = useFetch(getAllPlaceListUrl);
   const { hotPlaceLists, setHotPlaceLists } = useStore();
+  const { placeDetailInfo } = useStore();
 
   useEffect(() => {
     if (placeLists && placeLists.row) {
@@ -42,14 +44,16 @@ function App() {
   if (isLoading) return <Loading loading={true} />;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(hotPlaceLists);
-
   return (
     <div className={styles.app}>
       <ul className={styles.cardLists}>
         {hotPlaceLists.map((place, index) => (
-          <ListCard key={index} place={place} age={index + 1} />
+          <DetailListCard key={index} place={place} age={index + 1} />
         ))}
+        {placeDetailInfo &&
+          placeDetailInfo.EVENT_STTS.map(event => (
+            <EventListCard key={event.EVENT_NM} event={event} />
+          ))}
       </ul>
 
       <div className={styles.kakaoMapCon}>
