@@ -10,9 +10,9 @@ import styles from './ListCard.module.scss';
 // TODO 한산한 시간대 계산 로직 생각하기
 // TODO 막대 그래프 컴포넌트 만들기
 
-const ListCard = ({ place, age }) => {
+const ListCard = ({ place, age, onClick }) => {
   return (
-    <div className={styles.listCard}>
+    <div className={styles.listCard} onClick={onClick}>
       <div className={styles.listCardImg}>
         <img src={`https://data.seoul.go.kr/SeoulRtd/images/hotspot/${place.area_nm}.jpg`} alt='' />
       </div>
@@ -67,6 +67,7 @@ ListCard.propTypes = {
     area_congest_lvl: PropTypes.string.isRequired,
   }).isRequired,
   age: PropTypes.number.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default ListCard;
