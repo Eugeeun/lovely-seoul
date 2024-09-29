@@ -1,0 +1,38 @@
+@use '../../global.scss' as *;
+
+.barGraphCon {
+  width: 100%;
+  padding: $border-radius-default;
+
+  .barGraph {
+    height: 50px;
+    border-radius: $border-radius-default;
+    overflow: hidden;
+    margin-bottom: $padding-thin;
+  }
+
+  .colorCon {
+    display: flex;
+    justify-content: flex-end;
+    gap: $padding-default;
+
+    .colorInfo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+
+      .colorBox {
+        width: 15px;
+        height: 15px;
+        border-radius: $border-radius-circle;
+      }
+
+      span {
+        @include span-styles;
+        color: $black-color;
+        font-weight: $font-weight-regular;
+      }
+    }
+  }
+}
