@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types'; // PropTypes 임포트
 import styles from './ListCard.module.scss';
 
-// 어차피 디테일 페이지를 만들어야 하는데 ListCard를 재활용할 수 있음
-// DetailListCard를 만들고 그 안에 ListCard를 포함시키자
-// 그리고 DetailListCard를 기본렌더링하면 되잖아
-// 클릭했을 때 한적한 시간과 막대그래프가 보이게하고
-// 닫기를 누르면 없어지고
-// TODO DetailListCard컴포넌트 만들기
-// TODO 한산한 시간대 계산 로직 생각하기
-// TODO 막대 그래프 컴포넌트 만들기
+/**
+ * TODO
+ * 좋아요 버튼 기능 추가
+ * 좋아요 버튼을 누르면 빨간색으로 채움
+ * 로컬 스토리지에 place정보 저장
+ */
 
 const ListCard = ({ place, age, onClick }) => {
   return (
