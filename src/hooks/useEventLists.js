@@ -1,8 +1,8 @@
 import ky from 'ky';
-import { useState } from 'react';
+import useStore from '../store';
 
 const useEventLists = () => {
-  const [placeDetailInfo, setPlaceDetailInfo] = useState(null);
+  const { placeDetailInfo, setPlaceDetailInfo } = useStore();
 
   const fetchEventLists = async marker => {
     const apiUrl = `http://openapi.seoul.go.kr:8088/${
@@ -11,6 +11,7 @@ const useEventLists = () => {
     try {
       const data = await ky.get(apiUrl).json();
       setPlaceDetailInfo(data['CITYDATA']);
+      console.log(data['CITYDATA']);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
