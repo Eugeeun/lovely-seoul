@@ -9,6 +9,21 @@ import styles from './App.module.scss';
 import DetailListCard from './components/ListCard/DetailListCard';
 import EventListCard from './components/ListCard/EventListCard';
 
+/**
+ * TODO
+ * placeDetailInfo가 있으면 버튼 2개 만들어야 함
+ * 상세정보 + 다른 장소, 문화 행사 리스트 보이게 하기
+ *
+ * 로그인 컴포넌트 만들기
+ * 로그인된 정보는 로컬스토리지에 저장
+ *
+ * 헤더 컴포넌트 만들기
+ *
+ * 좋아요 기능 추가
+ *
+ * 리스트 타이플 컴포넌트 만들기
+ */
+
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
 
