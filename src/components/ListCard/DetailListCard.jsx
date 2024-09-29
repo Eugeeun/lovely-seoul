@@ -1,12 +1,13 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import ListCard from './ListCard';
 import PropTypes from 'prop-types';
 import styles from './ListCard.module.scss';
 import BarGraph from '../BarGraph/BarGraph';
 
 const DetailListCard = ({ place, age }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const leastTime = useMemo(() => {
-    const sortedTime = place.population.FCST_PPLTN.map(item => ({ ...item })); // 깊은 복사
+    const sortedTime = place.population.FCST_PPLTN.map(item => ({ ...item }));
     sortedTime.sort((a, b) => parseInt(a.FCST_PPLTN_MAX) - parseInt(b.FCST_PPLTN_MAX));
     return sortedTime;
   }, [place.population.FCST_PPLTN])[0]
@@ -26,12 +27,26 @@ const DetailListCard = ({ place, age }) => {
 
   return (
     <div className={styles.detailListCard}>
-      <ListCard place={place} age={age} />
-      <p className={styles.leastTime}>
-        <strong>{leastTime}</strong>시에 가장 한적해요!
-      </p>
-      <BarGraph data={data} />
-      <div>닫기 버튼</div>
+      <ListCard place={place} age={age} onClick={() => setIsOpen(true)} />
+      {isOpen && (
+        <>
+          <div className={styles.leastTimeCon}>
+            <p className={styles.leastTime}>
+              <strong>{leastTime}</strong>시에 가장 한적해요!
+            </p>
+          </div>
+          <BarGraph data={data} />
+          <div
+            className={styles.closeUpBtn}
+            onClick={() => {
+              console.log('clicked!');
+              setIsOpen(false);
+            }}
+          >
+            <img src='/closeUpBtn.svg' alt='' />
+          </div>
+        </>
+      )}
     </div>
   );
 };
