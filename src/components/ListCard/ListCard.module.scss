@@ -4,7 +4,7 @@
   display: flex;
   box-shadow: $box-shadow;
   border-radius: $border-radius-default;
-  gap: $padding-default;
+  gap: $padding-thin;
   justify-content: space-between;
 }
 
@@ -20,6 +20,8 @@
   @include list-style();
   padding: $padding-thicker;
   width: 100%;
+  box-shadow: none;
+  cursor: pointer;
 
   .listCardImg {
     width: 250px;
@@ -176,17 +178,26 @@
   }
 }
 
-.leastTime {
-  background-color: #d3d3d3;
+.leastTimeCon {
   width: 100%;
-  text-align: center;
-  padding: $padding-default;
-  border-radius: $border-radius-default;
-  font-family: $font-family-p;
-  font-size: $font-size-extra-large;
-  font-weight: $font-weight-bold;
+  padding: 0 $padding-thicker;
 
-  strong {
-    @include strong-styles;
+  .leastTime {
+    background-color: #d3d3d3;
+    text-align: center;
+    padding: $padding-default;
+    border-radius: $border-radius-default;
+    font-family: $font-family-p;
+    font-size: $font-size-extra-large;
+    font-weight: $font-weight-bold;
+
+    strong {
+      @include strong-styles;
+    }
   }
+}
+
+.closeUpBtn {
+  padding-bottom: $padding-default;
+  cursor: pointer;
 }
