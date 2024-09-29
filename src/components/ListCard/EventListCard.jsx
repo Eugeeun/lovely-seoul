@@ -1,10 +1,9 @@
+import PropTypes from 'prop-types';
 import styles from './ListCard.module.scss';
 
 const EventListCard = ({ event }) => {
-  console.log(event);
-
   return (
-    <div className={`${styles.listCard} ${styles.shadow}`}>
+    <div className={`${styles.listCard} ${styles.shadow}`} style={{ cursor: 'default' }}>
       <div className={styles.listCardImg}>
         <img src={event.THUMBNAIL} alt='' />
       </div>
@@ -32,6 +31,16 @@ const EventListCard = ({ event }) => {
       <div style={{ width: '24px' }}></div>
     </div>
   );
+};
+
+EventListCard.propTypes = {
+  event: PropTypes.shape({
+    THUMBNAIL: PropTypes.string.isRequired,
+    EVENT_NM: PropTypes.string.isRequired,
+    EVENT_PLACE: PropTypes.string.isRequired,
+    EVENT_PERIOD: PropTypes.string.isRequired,
+    URL: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default EventListCard;
