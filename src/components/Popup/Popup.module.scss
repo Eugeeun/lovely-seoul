@@ -62,4 +62,14 @@
     top: 0;
     bottom: 0;
   }
+
+  .closeBtn {
+    @include span-styles;
+    position: absolute;
+    top: $padding-default;
+    right: $padding-default;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }
