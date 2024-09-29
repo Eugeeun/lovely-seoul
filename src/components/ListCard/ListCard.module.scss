@@ -22,6 +22,7 @@
   width: 100%;
   box-shadow: none;
   cursor: pointer;
+  position: relative;
 
   .listCardImg {
     width: 250px;
@@ -43,11 +44,19 @@
     gap: $padding-thin;
     width: 350px;
 
+    // 이벤트 리스트 전용 스타일
+    &.eventStyle {
+      justify-content: flex-start;
+      gap: $padding-default;
+    }
+
     .title {
       color: $black-color;
       @include h3-styles;
     }
 
+    // TODO
+    // 텍스트가 길어지면 위치 아이콘이 작아지는 문제 해결
     .location {
       display: flex;
       gap: $padding-thin;
@@ -175,6 +184,40 @@
         }
       }
     }
+
+    // 이벤트 리스트 전용 스타일
+    .date {
+      display: flex;
+      gap: $padding-thin;
+      align-items: center;
+
+      .dateIcon {
+        width: 14px;
+
+        img {
+          width: 100%;
+        }
+      }
+      p {
+        @include p-styles;
+      }
+    }
+  }
+
+  .lookUp {
+    position: absolute;
+    right: $padding-thicker;
+    bottom: $padding-thicker;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $padding-default;
+
+    span {
+      @include span-styles;
+      font-size: $font-size-medium;
+      font-weight: $font-weight-regular;
+    }
   }
 }
 
@@ -200,4 +243,8 @@
 .closeUpBtn {
   padding-bottom: $padding-default;
   cursor: pointer;
+}
+
+.shadow {
+  box-shadow: $box-shadow;
 }
