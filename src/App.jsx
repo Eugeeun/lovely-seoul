@@ -9,9 +9,18 @@ import DetailListCard from './components/ListCard/DetailListCard';
 import EventListCard from './components/ListCard/EventListCard';
 import EventButtons from './components/EventButtons/EventButtons';
 import Login from './components/Login/Login';
+import Header from './components/Header/Header';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
+
+/**
+ * TODO
+ * 1. 헤더
+ * 2. 좋아요
+ * 3. 리스트 클릭 카카오맵에 반영
+ * 4. 검색
+ */
 
 function App() {
   const { data: placeLists, error, isLoading } = useFetch(getAllPlaceListUrl);
@@ -19,7 +28,7 @@ function App() {
   const { placeDetailInfo } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // 로그인 모달 상태 추가
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     setIsLoginModalOpen(!localStorage.getItem('userInfo'));
@@ -47,6 +56,8 @@ function App() {
     }
   }, [placeLists, setHotPlaceLists]);
 
+  // TODO
+  // 추후에는 data가 아니라 전역 상태 관리하고 있는 allPlaceLists에서 불러와서 결정
   useEffect(() => {
     if (placeDetailInfo) {
       const matched = data.find(item => item.area_nm === placeDetailInfo.AREA_NM);
@@ -59,7 +70,7 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <div>헤더</div>
+      <Header />
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
           {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
@@ -67,6 +78,12 @@ function App() {
             {!showEvents && matchedData && (
               <DetailListCard place={matchedData} defaultOpen={true} />
             )}
+
+            {/* // TODO
+                // 10대가 가장 많이 방문하는 곳인데 30대의 비율이 높을 수 있음
+                // 명시적으로 텍스트로 표시
+                // 아니면 절대적인 수가 아니라 비율로 로직을 수정
+            */}
             {showEvents
               ? placeDetailInfo &&
                 placeDetailInfo.EVENT_STTS.map(event => (
