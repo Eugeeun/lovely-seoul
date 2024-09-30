@@ -2,15 +2,26 @@
 
 .app {
   display: flex;
+  flex-direction: column;
   gap: $padding-default;
 
-  .cardLists {
-    width: 40%;
-    height: 100vh;
-    overflow: scroll;
-  }
+  .contentsCon {
+    display: flex;
 
-  .kakaoMapCon {
-    width: 60%;
+    .listCon {
+      width: 40%;
+
+      .cardLists {
+        display: flex;
+        flex-direction: column;
+        gap: $padding-default;
+        height: 100vh;
+        overflow: scroll;
+      }
+    }
+
+    .kakaoMapCon {
+      width: 60%;
+    }
   }
 }
