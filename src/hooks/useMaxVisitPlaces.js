@@ -15,22 +15,17 @@ const useMaxVisitPlaces = placeLists => {
           const ageGroupIndex = i + 1; // 1부터 6까지의 인덱스 사용
           return updatedLists.reduce(
             (maxPlace, place) => {
-              const { AREA_PPLTN_MAX, AREA_PPLTN_MIN } = place.population;
-              const popAvg = Math.floor((parseInt(AREA_PPLTN_MAX) + parseInt(AREA_PPLTN_MIN)) / 2);
-              const numOfVisit = Math.floor(
-                (popAvg * parseFloat(place.population[`PPLTN_RATE_${ageGroupIndex}0`])) / 100
-              );
-
-              return numOfVisit > maxPlace.numOfVisit ? { place, numOfVisit } : maxPlace;
+              const popRate = parseFloat(place.population[`PPLTN_RATE_${ageGroupIndex}0`]);
+              return popRate > maxPlace.popRate ? { place, popRate } : maxPlace;
             },
-            { numOfVisit: 0 }
+            { popRate: 0 }
           ).place;
         });
 
         setHotPlaceLists(maxVisitPlaces);
       });
     }
-  }, [placeLists, setHotPlaceLists]);
+  }, [placeLists, setHotPlaceLists, setAllPlaceLists]);
 };
 
 export default useMaxVisitPlaces;
