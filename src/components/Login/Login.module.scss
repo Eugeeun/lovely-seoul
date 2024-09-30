@@ -6,10 +6,15 @@
   justify-content: center;
   align-items: center;
   width: 350px;
-  border: 1px solid $gray-color;
   border-radius: $border-radius-default;
   margin: 0 auto;
   padding: $padding-default;
+  background-color: $white-color;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 
   .title {
     @include p-styles;
@@ -67,5 +72,12 @@
       padding: $padding-thin;
       color: $very-crowded-color;
     }
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: $padding-default;
+    right: $padding-default;
+    cursor: pointer;
   }
 }

@@ -2,7 +2,7 @@ import useForm from '../../hooks/useForm';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import styles from './Login.module.scss';
 
-const Login = () => {
+const Login = ({ handleClose }) => {
   const { values, errors, handleChange, handleSubmit } = useForm({
     name: '',
     age: '',
@@ -11,6 +11,7 @@ const Login = () => {
 
   const onSubmit = formData => {
     setUserInfo(formData);
+    handleClose();
   };
 
   return (
@@ -42,6 +43,9 @@ const Login = () => {
         </div>
         <button type='submit'>Continue</button>
       </form>
+      <div className={styles.closeBtn} onClick={handleClose}>
+        <img src='/closeBtn.svg' alt='' />
+      </div>
     </div>
   );
 };
