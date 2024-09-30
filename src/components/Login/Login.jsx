@@ -1,6 +1,7 @@
 import useForm from '../../hooks/useForm';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import styles from './Login.module.scss';
+import useStore from '../../store';
 
 const Login = ({ handleClose }) => {
   const { values, errors, handleChange, handleSubmit } = useForm({
@@ -8,9 +9,11 @@ const Login = ({ handleClose }) => {
     age: '',
   });
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', { name: '', age: '' });
+  const { setSavedUserInfo } = useStore();
 
   const onSubmit = formData => {
     setUserInfo(formData);
+    setSavedUserInfo(formData);
     handleClose();
   };
 

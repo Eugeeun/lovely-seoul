@@ -1,0 +1,19 @@
+@use '../../global.scss' as *;
+
+.welcomeCon {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-default;
+  gap: $padding-thin;
+
+  h2 {
+    @include h2-styles;
+
+    strong {
+      @include strong-styles;
+    }
+  }
+  span {
+    @include p-styles;
+  }
+}

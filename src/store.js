@@ -21,6 +21,9 @@ const useStore = create(set => ({
   setHotPlaceLists: lists => set({ hotPlaceLists: lists }),
   setLoading: loading => set({ loading }),
   setError: error => set({ error }),
+
+  savedUserInfo: null,
+  setSavedUserInfo: user => set({ savedUserInfo: user }),
 }));
 
 export default useStore;
