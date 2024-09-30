@@ -1,13 +1,14 @@
 import KakaoMap from './components/KakaoMap/KakaoMap';
 import useFetch from './hooks/useFetch';
 import Loading from './components/Loading/Loading';
-import useStore from './store'; // Zustand 스토어 임포트
+import useStore from './store';
 import data from '../data.json';
 import { useEffect, useState } from 'react';
 import styles from './App.module.scss';
 import DetailListCard from './components/ListCard/DetailListCard';
 import EventListCard from './components/ListCard/EventListCard';
 import EventButtons from './components/EventButtons/EventButtons';
+import Login from './components/Login/Login';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
@@ -18,11 +19,11 @@ function App() {
   const { placeDetailInfo } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-  /**
-   * TODO
-   * 나중에 여기에 allPlaceLists를 불러와서 placeDetailInfo의 AREA_NM에 해당하는
-   * 리스트를 가져올것
-   */
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // 로그인 모달 상태 추가
+
+  useEffect(() => {
+    setIsLoginModalOpen(!localStorage.getItem('userInfo'));
+  }, []);
 
   useEffect(() => {
     if (placeLists && placeLists.row) {
@@ -62,7 +63,6 @@ function App() {
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
           {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
-
           <ul className={styles.cardLists}>
             {!showEvents && matchedData && (
               <DetailListCard place={matchedData} defaultOpen={true} />
@@ -77,11 +77,19 @@ function App() {
                 ))}
           </ul>
         </div>
-
         <div className={styles.kakaoMapCon}>
           <KakaoMap placeLists={placeLists.row} />
         </div>
       </div>
+      {isLoginModalOpen && (
+        <div className={styles.loginCon}>
+          <Login
+            handleClose={() => {
+              setIsLoginModalOpen(false);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
