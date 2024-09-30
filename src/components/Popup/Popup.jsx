@@ -8,6 +8,9 @@ const Popup = ({ title, handleClose }) => {
         <img src={`https://data.seoul.go.kr/SeoulRtd/images/hotspot/${title}.jpg`} alt={title} />
       </div>
       <span className={styles.popupTitle}>{title}</span>
+      <button className={`${styles.closeBtn} ${styles.bottom}`} onClick={handleClose}>
+        닫기
+      </button>
     </div>
   );
 };

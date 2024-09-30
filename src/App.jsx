@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import styles from './App.module.scss';
 import DetailListCard from './components/ListCard/DetailListCard';
 import EventListCard from './components/ListCard/EventListCard';
-import EventButtons from './components/EventButtons/EventButtons'; // EventButtons 임포트
+import EventButtons from './components/EventButtons/EventButtons';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
@@ -16,7 +16,13 @@ function App() {
   const { data: placeLists, error, isLoading } = useFetch(getAllPlaceListUrl);
   const { hotPlaceLists, setHotPlaceLists } = useStore();
   const { placeDetailInfo } = useStore();
-  const [showEvents, setShowEvents] = useState(false); // 이벤트 리스트 표시 여부 상태
+  const [showEvents, setShowEvents] = useState(false);
+  const [matchedData, setMatchedData] = useState(null);
+  /**
+   * TODO
+   * 나중에 여기에 allPlaceLists를 불러와서 placeDetailInfo의 AREA_NM에 해당하는
+   * 리스트를 가져올것
+   */
 
   useEffect(() => {
     if (placeLists && placeLists.row) {
@@ -40,6 +46,13 @@ function App() {
     }
   }, [placeLists, setHotPlaceLists]);
 
+  useEffect(() => {
+    if (placeDetailInfo) {
+      const matched = data.find(item => item.area_nm === placeDetailInfo.AREA_NM);
+      setMatchedData(matched);
+    }
+  }, [placeDetailInfo]);
+
   if (isLoading) return <Loading loading={true} />;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -48,16 +61,19 @@ function App() {
       <div>헤더</div>
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
-          {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}{' '}
-          {/* EventButtons 사용 */}
+          {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
+
           <ul className={styles.cardLists}>
+            {!showEvents && matchedData && (
+              <DetailListCard place={matchedData} defaultOpen={true} />
+            )}
             {showEvents
               ? placeDetailInfo &&
                 placeDetailInfo.EVENT_STTS.map(event => (
                   <EventListCard key={event.EVENT_NM} event={event} />
                 ))
               : hotPlaceLists.map((place, index) => (
-                  <DetailListCard key={index} place={place} age={index + 1} />
+                  <DetailListCard key={index} place={place} defaultOpen={false} />
                 ))}
           </ul>
         </div>

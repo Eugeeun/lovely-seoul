@@ -12,6 +12,9 @@ const useStore = create(set => ({
   setSelectedEvent: marker => set({ selectedEvent: marker }),
   clearSelectedEvent: () => set({ selectedEvent: null }),
 
+  allPlaceLists: [],
+  setAllPlaceLists: lists => set({ allPlaceLists: lists }),
+
   hotPlaceLists: [],
   loading: false,
   error: null,

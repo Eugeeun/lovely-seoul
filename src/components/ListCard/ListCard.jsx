@@ -41,7 +41,7 @@ const ListCard = ({ place, age, onClick }) => {
           <span className={`${styles.density} ${styles[`density${place.area_congest_num}`]}`}>
             {place.area_congest_lvl}
           </span>
-          <span className={`${styles.age} ${styles[`age${age}0`]}`}>{age}0대한테 인기 많아요</span>
+          <span className={`${styles.age} ${styles[`age${age}`]}`}>{age}대한테 인기 많아요</span>
         </div>
       </div>
       <div>
@@ -64,7 +64,7 @@ ListCard.propTypes = {
     }).isRequired,
     area_congest_lvl: PropTypes.string.isRequired,
   }).isRequired,
-  age: PropTypes.number.isRequired,
+  age: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 
