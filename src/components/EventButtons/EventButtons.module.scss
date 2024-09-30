@@ -1,0 +1,36 @@
+@use '../../global.scss' as *;
+
+.buttonCon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: $padding-thin $padding-thicker;
+  gap: $padding-default;
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: calc($padding-thin / 2) $padding-thin;
+    gap: $padding-thin;
+    border-radius: $border-radius-thin;
+    border: 1px solid $gray-color;
+    background-color: $white-color;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    img {
+      width: 21px;
+      height: 28px;
+    }
+
+    span {
+      @include p-styles;
+      font-weight: $font-weight-regular;
+    }
+  }
+}
