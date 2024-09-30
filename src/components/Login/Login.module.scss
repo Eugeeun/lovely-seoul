@@ -1,0 +1,71 @@
+@use '../../global.scss' as *;
+
+.loginCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  border: 1px solid $gray-color;
+  border-radius: $border-radius-default;
+  margin: 0 auto;
+  padding: $padding-default;
+
+  .title {
+    @include p-styles;
+    font-size: $font-size-extra-large;
+    padding: $padding-default;
+    padding-bottom: 0;
+  }
+
+  .desc {
+    @include span-styles;
+    padding: $padding-thin;
+    color: $gray-color;
+    font-weight: $font-weight-regular;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: $padding-thin;
+    margin-top: $padding-thick;
+    width: 100%;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input,
+    select,
+    button {
+      @include p-styles;
+      padding: $padding-thin;
+      border-radius: $border-radius-thin;
+      border: 1px solid $gray-color;
+      width: 100%;
+      font-weight: $font-weight-regular;
+    }
+
+    button {
+      border-radius: $border-radius-default;
+      color: $white-color;
+      background-color: $primary-color-transparent;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $primary-color;
+      }
+    }
+
+    .error {
+      @include span-styles;
+      font-size: $font-size-small;
+      font-weight: $font-weight-regular;
+      padding: $padding-thin;
+      color: $very-crowded-color;
+    }
+  }
+}
