@@ -4,22 +4,28 @@ import PropTypes from 'prop-types';
 import styles from './ListCard.module.scss';
 import BarGraph from '../BarGraph/BarGraph';
 
-const DetailListCard = ({ place, age }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const DetailListCard = ({ place, defaultOpen }) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
   const leastTime = useMemo(() => {
     const sortedTime = place.population.FCST_PPLTN.map(item => ({ ...item }));
     sortedTime.sort((a, b) => parseInt(a.FCST_PPLTN_MAX) - parseInt(b.FCST_PPLTN_MAX));
-    return sortedTime;
-  }, [place.population.FCST_PPLTN])[0]
-    .FCST_TIME.split(' ')[1]
-    .split(':')[0];
+    return sortedTime[0].FCST_TIME.split(' ')[1].split(':')[0];
+  }, [place.population.FCST_PPLTN]);
 
+  // 연령대 비율 계산
   const ageGroups = ['10', '20', '30', '40', '50', '60'];
+  const agePercentages = ageGroups.map(age => parseFloat(place.population[`PPLTN_RATE_${age}`]));
+
+  // 가장 높은 비율의 연령대 찾기
+  const maxAgeIndex = agePercentages.indexOf(Math.max(...agePercentages));
+  const maxAgeGroup = ageGroups[maxAgeIndex];
+
   const data = [
     {
       label: '연령별 비율',
       ...ageGroups.reduce((acc, age) => {
-        acc[`PPLTN_RATE_${age}`] = parseFloat(place.population[`PPLTN_RATE_${age}`]);
+        acc[`PPLTN_RATE_${age}`] = agePercentages[ageGroups.indexOf(age)];
         return acc;
       }, {}),
     },
@@ -27,7 +33,7 @@ const DetailListCard = ({ place, age }) => {
 
   return (
     <div className={styles.detailListCard}>
-      <ListCard place={place} age={age} onClick={() => setIsOpen(true)} />
+      <ListCard place={place} age={maxAgeGroup} onClick={() => setIsOpen(true)} />
       {isOpen && (
         <>
           <div className={styles.leastTimeCon}>
@@ -65,10 +71,16 @@ DetailListCard.propTypes = {
           FCST_PPLTN_MAX: PropTypes.string.isRequired,
         })
       ).isRequired,
+      PPLTN_RATE_10: PropTypes.string.isRequired,
+      PPLTN_RATE_20: PropTypes.string.isRequired,
+      PPLTN_RATE_30: PropTypes.string.isRequired,
+      PPLTN_RATE_40: PropTypes.string.isRequired,
+      PPLTN_RATE_50: PropTypes.string.isRequired,
+      PPLTN_RATE_60: PropTypes.string.isRequired,
     }).isRequired,
     area_congest_lvl: PropTypes.string.isRequired,
   }).isRequired,
-  age: PropTypes.number.isRequired,
+  defaultOpen: PropTypes.bool,
 };
 
 export default DetailListCard;
