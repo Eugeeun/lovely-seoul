@@ -17,6 +17,35 @@
         gap: $padding-default;
         height: 100vh;
         overflow: scroll;
+
+        .ageGroup {
+          @include p-styles;
+          padding: $padding-thin $padding-thicker;
+          font-weight: $font-weight-regular;
+
+          strong {
+            border-radius: $border-radius-thin;
+          }
+
+          .age10 {
+            background-color: $teenagers-color;
+          }
+          .age20 {
+            background-color: $twenties-color;
+          }
+          .age30 {
+            background-color: $thirties-color;
+          }
+          .age40 {
+            background-color: $forties-color;
+          }
+          .age50 {
+            background-color: $fifties-color;
+          }
+          .age60 {
+            background-color: $sixties-color;
+          }
+        }
       }
     }
 

@@ -10,16 +10,17 @@ import EventListCard from './components/ListCard/EventListCard';
 import EventButtons from './components/EventButtons/EventButtons';
 import Login from './components/Login/Login';
 import Header from './components/Header/Header';
+import Welcome from './components/Welcome/Welcome';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
 
 /**
  * TODO
- * 1. 헤더
  * 2. 좋아요
  * 3. 리스트 클릭 카카오맵에 반영
  * 4. 검색
+ * 5. 마이페이지
  */
 
 function App() {
@@ -40,15 +41,10 @@ function App() {
         const ageGroupIndex = i + 1;
         return data.reduce(
           (maxPlace, place) => {
-            const { AREA_PPLTN_MAX, AREA_PPLTN_MIN } = place.population;
-            const popAvg = Math.floor((parseInt(AREA_PPLTN_MAX) + parseInt(AREA_PPLTN_MIN)) / 2);
-            const numOfVisit = Math.floor(
-              (popAvg * parseFloat(place.population[`PPLTN_RATE_${ageGroupIndex}0`])) / 100
-            );
-
-            return numOfVisit > maxPlace.numOfVisit ? { place, numOfVisit } : maxPlace;
+            const popRate = parseFloat(place.population[`PPLTN_RATE_${ageGroupIndex}0`]);
+            return popRate > maxPlace.popRate ? { place, popRate } : maxPlace;
           },
-          { numOfVisit: 0 }
+          { popRate: 0 }
         ).place;
       });
 
@@ -73,24 +69,26 @@ function App() {
       <Header />
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
+          <Welcome />
           {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
           <ul className={styles.cardLists}>
             {!showEvents && matchedData && (
               <DetailListCard place={matchedData} defaultOpen={true} />
             )}
 
-            {/* // TODO
-                // 10대가 가장 많이 방문하는 곳인데 30대의 비율이 높을 수 있음
-                // 명시적으로 텍스트로 표시
-                // 아니면 절대적인 수가 아니라 비율로 로직을 수정
-            */}
             {showEvents
               ? placeDetailInfo &&
                 placeDetailInfo.EVENT_STTS.map(event => (
                   <EventListCard key={event.EVENT_NM} event={event} />
                 ))
               : hotPlaceLists.map((place, index) => (
-                  <DetailListCard key={index} place={place} defaultOpen={false} />
+                  <div key={index}>
+                    <p className={styles.ageGroup}>
+                      <strong className={`${styles[`age${index + 1}0`]}`}>{index + 1}0대</strong>가
+                      가장 많이 방문했어요!
+                    </p>
+                    <DetailListCard place={place} defaultOpen={false} />
+                  </div>
                 ))}
           </ul>
         </div>
