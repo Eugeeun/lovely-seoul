@@ -44,8 +44,6 @@ const DetailListCard = ({ place, defaultOpen }) => {
     }
   };
 
-  console.log(place);
-
   return (
     <div className={styles.detailListCard}>
       <ListCard place={place} age={maxAgeGroup} handleClick={handleClick} />
