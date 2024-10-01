@@ -24,6 +24,15 @@ const useStore = create(set => ({
 
   savedUserInfo: null,
   setSavedUserInfo: user => set({ savedUserInfo: user }),
+
+  mapCenter: {
+    lat: 37.5665,
+    lng: 126.978,
+  },
+  setMapCenter: center => set({ mapCenter: center }),
+
+  mapLevel: 6,
+  setMapLevel: level => set({ mapLevel: level }),
 }));
 
 export default useStore;
