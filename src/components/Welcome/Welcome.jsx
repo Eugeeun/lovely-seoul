@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Welcome = () => {
-  const { savedUserInfo, setSavedUserInfo, placeDetailInfo } = useStore();
+  const { savedUserInfo, setSavedUserInfo, placeDetailInfo, savedSearchTerm } = useStore();
   const location = useLocation();
 
   useEffect(() => {
@@ -27,6 +27,13 @@ const Welcome = () => {
         front: ``,
         strong: `${savedUserInfo.name}님이 `,
         back: `찜한 목록이에요!`,
+        desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
+      };
+    } else if (location.pathname === '/searchpage') {
+      return {
+        front: ``,
+        strong: `${savedSearchTerm}(으)로 `,
+        back: `검색한 결과에요!`,
         desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
       };
     } else if (savedUserInfo) {
