@@ -33,6 +33,9 @@ const useStore = create(set => ({
 
   mapLevel: 6,
   setMapLevel: level => set({ mapLevel: level }),
+
+  isLoginModalOpen: false,
+  setIsLoginModalOpen: state => set({ isLoginModalOpen: state }),
 }));
 
 export default useStore;
