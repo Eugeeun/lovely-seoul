@@ -1,4 +1,4 @@
-import styles from './MainPage.module.scss';
+import styles from '../common.module.scss';
 import useStore from '../../store';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 

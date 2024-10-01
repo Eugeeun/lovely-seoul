@@ -1,5 +1,5 @@
 import useStore from '../../store';
-import styles from './DetailPage.module.scss';
+import styles from '../common.module.scss';
 import EventButtons from '../../components/EventButtons/EventButtons';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 import EventListCard from '../../components/ListCard/EventListCard';

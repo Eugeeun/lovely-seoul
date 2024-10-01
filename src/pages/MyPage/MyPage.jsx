@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DetailListCard from '../../components/ListCard/DetailListCard';
-import styles from './MyPage.module.scss';
+import styles from '../common.module.scss';
 
 const MyPage = () => {
   const [likedPlaces] = useState(() => JSON.parse(localStorage.getItem('likedPlaces')) || {});
