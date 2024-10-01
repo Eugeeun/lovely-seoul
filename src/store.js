@@ -36,6 +36,9 @@ const useStore = create(set => ({
 
   isLoginModalOpen: false,
   setIsLoginModalOpen: state => set({ isLoginModalOpen: state }),
+
+  savedSearchTerm: '',
+  setSavedSearchTerm: term => set({ savedSearchTerm: term }),
 }));
 
 export default useStore;
