@@ -6,8 +6,14 @@ import useStore from '../../store';
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel, setIsLoginModalOpen } =
-    useStore();
+  const {
+    setSelectedPlace,
+    setPlaceDetailInfo,
+    setMapCenter,
+    setMapLevel,
+    setIsLoginModalOpen,
+    setSavedSearchTerm,
+  } = useStore();
 
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
@@ -15,7 +21,9 @@ const Header = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(searchTerm);
+    setSavedSearchTerm(searchTerm);
+    navigate('/searchpage');
+    setSearchTerm('');
   };
 
   const handleLogoClick = () => {
