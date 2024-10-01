@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import useStore from '../../store';
 
-const Header = ({ handleMatchedData }) => {
+const Header = ({ handleMatchedData, handleModalOpen }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const { setSelectedPlace, setPlaceDetailInfo } = useStore();
+  const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel } = useStore();
 
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
@@ -17,20 +17,27 @@ const Header = ({ handleMatchedData }) => {
     console.log(searchTerm);
   };
 
-  const handleLogoClick = e => {
+  const handleLogoClick = () => {
     console.log('logo clicked!');
     navigate('/');
     setSelectedPlace(null);
     setPlaceDetailInfo(null);
     handleMatchedData(null);
+    setMapCenter({
+      lat: 37.5665,
+      lng: 126.978,
+    });
+    setMapLevel(6);
   };
 
-  // TODO
-  // 카카오맵 서울시청을 중앙으로
-  // 오버레이 닫기
-
-  // TODO
-  // 마이페이지 기능 추가
+  const handleLikeBtnClick = () => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
+    if (!userInfo) {
+      handleModalOpen(true);
+    } else {
+      navigate('/mypage');
+    }
+  };
 
   return (
     <div className={styles.header}>
@@ -45,7 +52,7 @@ const Header = ({ handleMatchedData }) => {
           </button>
         </form>
       </div>
-      <div className={styles.likeBtnCon} onClick={() => navigate('/mypage')}>
+      <div className={styles.likeBtnCon} onClick={handleLikeBtnClick}>
         <div className={styles.likeBtn}>
           <svg
             width='24'
