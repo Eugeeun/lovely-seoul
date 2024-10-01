@@ -3,9 +3,9 @@ import styles from './ListCard.module.scss';
 import { useEffect, useState } from 'react';
 import useStore from '../../store';
 
-const ListCard = ({ place, age, onClick }) => {
+const ListCard = ({ place, age, handleClick }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const { isLoginModalOpen, setIsLoginModalOpen } = useStore();
+  const { setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
     const savedLikedPlaces = JSON.parse(localStorage.getItem('likedPlaces')) || {};
@@ -37,7 +37,7 @@ const ListCard = ({ place, age, onClick }) => {
   };
 
   return (
-    <div className={styles.listCard} onClick={onClick}>
+    <div className={styles.listCard} onClick={handleClick}>
       <div className={styles.listCardImg}>
         <img src={`https://data.seoul.go.kr/SeoulRtd/images/hotspot/${place.area_nm}.jpg`} alt='' />
       </div>
@@ -108,7 +108,7 @@ ListCard.propTypes = {
     area_congest_lvl: PropTypes.string.isRequired,
   }).isRequired,
   age: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  handleClick: PropTypes.func,
 };
 
 export default ListCard;

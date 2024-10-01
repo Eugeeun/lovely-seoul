@@ -3,9 +3,11 @@ import ListCard from './ListCard';
 import PropTypes from 'prop-types';
 import styles from './ListCard.module.scss';
 import BarGraph from '../BarGraph/BarGraph';
+import useStore from '../../store';
 
 const DetailListCard = ({ place, defaultOpen }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const { setMapCenter, setMapLevel } = useStore();
 
   const leastTime = useMemo(() => {
     const sortedTime = place.population.FCST_PPLTN.map(item => ({ ...item }));
@@ -31,9 +33,22 @@ const DetailListCard = ({ place, defaultOpen }) => {
     },
   ];
 
+  const handleClick = () => {
+    setIsOpen(true);
+    if (!isOpen) {
+      setMapCenter({
+        lat: place.x,
+        lng: place.y,
+      });
+      setMapLevel(2);
+    }
+  };
+
+  console.log(place);
+
   return (
     <div className={styles.detailListCard}>
-      <ListCard place={place} age={maxAgeGroup} onClick={() => setIsOpen(true)} />
+      <ListCard place={place} age={maxAgeGroup} handleClick={handleClick} />
       {isOpen && (
         <>
           <div className={styles.leastTimeCon}>
