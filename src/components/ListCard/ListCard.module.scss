@@ -219,6 +219,11 @@
       font-weight: $font-weight-regular;
     }
   }
+
+  .liked {
+    fill: $like-color;
+    stroke: $like-color;
+  }
 }
 
 .leastTimeCon {
