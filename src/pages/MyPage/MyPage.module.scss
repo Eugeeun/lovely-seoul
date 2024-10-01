@@ -1,0 +1,9 @@
+@use '../../global.scss' as *;
+
+.cardLists {
+  display: flex;
+  flex-direction: column;
+  gap: $padding-default;
+  height: 100vh;
+  overflow: scroll;
+}
