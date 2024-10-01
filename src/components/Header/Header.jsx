@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import useStore from '../../store';
 
-const Header = ({ handleMatchedData }) => {
+const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel, setIsLoginModalOpen } =
@@ -22,7 +22,6 @@ const Header = ({ handleMatchedData }) => {
     navigate('/');
     setSelectedPlace(null);
     setPlaceDetailInfo(null);
-    handleMatchedData(null);
     setMapCenter({
       lat: 37.5665,
       lng: 126.978,
