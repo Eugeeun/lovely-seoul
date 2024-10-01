@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import useStore from '../../store';
 
-const Header = ({ handleMatchedData, handleModalOpen }) => {
+const Header = ({ handleMatchedData }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel } = useStore();
+  const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel, setIsLoginModalOpen } =
+    useStore();
 
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
@@ -18,7 +19,6 @@ const Header = ({ handleMatchedData, handleModalOpen }) => {
   };
 
   const handleLogoClick = () => {
-    console.log('logo clicked!');
     navigate('/');
     setSelectedPlace(null);
     setPlaceDetailInfo(null);
@@ -33,7 +33,7 @@ const Header = ({ handleMatchedData, handleModalOpen }) => {
   const handleLikeBtnClick = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
     if (!userInfo) {
-      handleModalOpen(true);
+      setIsLoginModalOpen(true);
     } else {
       navigate('/mypage');
     }
