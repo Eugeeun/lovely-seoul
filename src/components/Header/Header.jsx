@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
+import useStore from '../../store';
 
-const Header = () => {
+const Header = ({ handleMatchedData }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const { setSelectedPlace, setPlaceDetailInfo, setMapCenter, setMapLevel, setIsLoginModalOpen } =
+    useStore();
 
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
@@ -13,10 +18,31 @@ const Header = () => {
     console.log(searchTerm);
   };
 
+  const handleLogoClick = () => {
+    navigate('/');
+    setSelectedPlace(null);
+    setPlaceDetailInfo(null);
+    handleMatchedData(null);
+    setMapCenter({
+      lat: 37.5665,
+      lng: 126.978,
+    });
+    setMapLevel(6);
+  };
+
+  const handleLikeBtnClick = () => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
+    if (!userInfo) {
+      setIsLoginModalOpen(true);
+    } else {
+      navigate('/mypage');
+    }
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.logoAndSearchCon}>
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={handleLogoClick}>
           <img src='/logo.svg' alt='' />
         </div>
         <form onSubmit={handleSubmit}>
@@ -26,7 +52,7 @@ const Header = () => {
           </button>
         </form>
       </div>
-      <div className={styles.likeBtnCon}>
+      <div className={styles.likeBtnCon} onClick={handleLikeBtnClick}>
         <div className={styles.likeBtn}>
           <svg
             width='24'

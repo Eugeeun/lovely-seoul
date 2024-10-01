@@ -12,30 +12,25 @@ import EventMarker from '../EventMarker/EventMarker';
 import useEventLists from '../../hooks/useEventLists';
 
 const KakaoMap = ({ placeLists }) => {
-  const [level, setLevel] = useState(6);
-
-  const [center, setCenter] = useState({
-    lat: 37.5665,
-    lng: 126.978,
-  });
+  const { mapCenter, setMapCenter, mapLevel, setMapLevel } = useStore();
   const { selectedPlace, setSelectedPlace, clearSelectedPlace } = useStore();
   const { selectedEvent, setSelectedEvent, clearSelectedEvent } = useStore();
   const { placeDetailInfo, fetchEventLists } = useEventLists();
 
-  const zoomIn = () => setLevel(prevLevel => Math.max(prevLevel - 1, 1));
-  const zoomOut = () => setLevel(prevLevel => Math.min(prevLevel + 1, 14));
+  const zoomIn = () => setMapLevel(Math.max(mapLevel - 1, 1));
+  const zoomOut = () => setMapLevel(Math.min(mapLevel + 1, 14));
 
   const handlePlaceMarkerClick = marker => {
     clearSelectedEvent();
     setSelectedPlace(marker);
-    setLevel(2);
-    setCenter({ lat: marker.x, lng: marker.y });
+    setMapLevel(2);
+    setMapCenter({ lat: marker.x, lng: marker.y });
     fetchEventLists(marker);
   };
 
   return (
     <div>
-      <Map center={center} level={level} className={styles.kakoMap}>
+      <Map center={mapCenter} level={mapLevel} className={styles.kakoMap}>
         {placeLists.map((marker, i) => (
           <PlaceMarker key={i} marker={marker} onClick={() => handlePlaceMarkerClick(marker)} />
         ))}

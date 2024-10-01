@@ -1,9 +1,11 @@
 import styles from './Welcome.module.scss';
 import useStore from '../../store';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Welcome = () => {
   const { savedUserInfo, setSavedUserInfo, placeDetailInfo } = useStore();
+  const location = useLocation();
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem('userInfo');
@@ -19,6 +21,13 @@ const Welcome = () => {
         strong: placeDetailInfo.AREA_NM,
         back: '은 지금!',
         desc: '가장 한산한 시간대를 확인해보세요!',
+      };
+    } else if (location.pathname === '/mypage') {
+      return {
+        front: ``,
+        strong: `${savedUserInfo.name}님이 `,
+        back: `찜한 목록이에요!`,
+        desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
       };
     } else if (savedUserInfo) {
       return {

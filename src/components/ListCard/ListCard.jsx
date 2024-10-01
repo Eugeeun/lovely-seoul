@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'; // PropTypes 임포트
 import styles from './ListCard.module.scss';
 import { useEffect, useState } from 'react';
+import useStore from '../../store';
 
 const ListCard = ({ place, age, onClick }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const { isLoginModalOpen, setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
     const savedLikedPlaces = JSON.parse(localStorage.getItem('likedPlaces')) || {};
@@ -28,7 +30,10 @@ const ListCard = ({ place, age, onClick }) => {
 
   const handleLIkeClick = e => {
     e.stopPropagation();
-    setIsLiked(!isLiked);
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
+    if (!userInfo) {
+      setIsLoginModalOpen(true);
+    } else setIsLiked(!isLiked);
   };
 
   return (
