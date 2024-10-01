@@ -12,19 +12,14 @@ import { Routes, Route } from 'react-router-dom';
 import MyPage from './pages/MyPage/MyPage';
 import DetailPage from './pages/DetailPage/DetailPage';
 import MainPage from './pages/MainPage/MainPage';
+import SearchPage from './pages/SearchPage/SearchPage';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
 
-/**
- * TODO
- * 3. 리스트 클릭 카카오맵에 반영
- * 4. 검색
- */
-
 function App() {
   const { data: placeLists, error, isLoading } = useFetch(getAllPlaceListUrl);
-  const { hotPlaceLists, setHotPlaceLists } = useStore();
+  const { setAllPlaceLists, setHotPlaceLists } = useStore();
   const { isLoginModalOpen, setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
@@ -33,6 +28,7 @@ function App() {
 
   useEffect(() => {
     if (placeLists && placeLists.row) {
+      setAllPlaceLists(data);
       const maxVisitPlaces = Array.from({ length: 6 }, (_, i) => {
         const ageGroupIndex = i + 1;
         return data.reduce(
@@ -61,6 +57,7 @@ function App() {
             <Route path='/' element={<MainPage />} />
             <Route path='/detailpage' element={<DetailPage />} />
             <Route path='/mypage' element={<MyPage />} />
+            <Route path='/searchpage' element={<SearchPage />} />
           </Routes>
         </div>
         <div className={styles.kakaoMapCon}>
