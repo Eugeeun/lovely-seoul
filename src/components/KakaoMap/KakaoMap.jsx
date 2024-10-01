@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Map, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import styles from './KakaoMap.module.scss';
 import zoomInImage from '/zoom-in.svg';
@@ -10,12 +9,14 @@ import PopupEvent from '../Popup/PopupEvent';
 import PlaceMarker from '../PlaceMarker/PlaceMarker';
 import EventMarker from '../EventMarker/EventMarker';
 import useEventLists from '../../hooks/useEventLists';
+import { useNavigate } from 'react-router-dom';
 
 const KakaoMap = ({ placeLists }) => {
   const { mapCenter, setMapCenter, mapLevel, setMapLevel } = useStore();
   const { selectedPlace, setSelectedPlace, clearSelectedPlace } = useStore();
   const { selectedEvent, setSelectedEvent, clearSelectedEvent } = useStore();
   const { placeDetailInfo, fetchEventLists } = useEventLists();
+  const navigate = useNavigate();
 
   const zoomIn = () => setMapLevel(Math.max(mapLevel - 1, 1));
   const zoomOut = () => setMapLevel(Math.min(mapLevel + 1, 14));
@@ -26,6 +27,7 @@ const KakaoMap = ({ placeLists }) => {
     setMapLevel(2);
     setMapCenter({ lat: marker.x, lng: marker.y });
     fetchEventLists(marker);
+    navigate('/detailpage');
   };
 
   return (

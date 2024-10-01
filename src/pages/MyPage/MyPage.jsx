@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 import styles from './MyPage.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
-  const [likedPlaces, setLikedPlaces] = useState(
-    () => JSON.parse(localStorage.getItem('likedPlaces')) || {}
-  );
+  const [likedPlaces] = useState(() => JSON.parse(localStorage.getItem('likedPlaces')) || {});
 
   return (
     <ul className={styles.cardLists}>
