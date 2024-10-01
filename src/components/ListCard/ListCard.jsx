@@ -30,7 +30,8 @@ const ListCard = ({ place, age, onClick }) => {
 
   const handleLIkeClick = e => {
     e.stopPropagation();
-    if (!isLoginModalOpen) {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
+    if (!userInfo) {
       setIsLoginModalOpen(true);
     } else setIsLiked(!isLiked);
   };
