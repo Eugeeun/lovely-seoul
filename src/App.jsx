@@ -11,6 +11,8 @@ import EventButtons from './components/EventButtons/EventButtons';
 import Login from './components/Login/Login';
 import Header from './components/Header/Header';
 import Welcome from './components/Welcome/Welcome';
+import { Routes, Route } from 'react-router-dom';
+import MyPage from './pages/MyPage/MyPage';
 
 const getAllPlaceListUrl =
   'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
@@ -66,31 +68,43 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <Header />
+      <Header handleMatchedData={setMatchedData} />
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
           <Welcome />
-          {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
-          <ul className={styles.cardLists}>
-            {!showEvents && matchedData && (
-              <DetailListCard place={matchedData} defaultOpen={true} />
-            )}
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <>
+                  {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
+                  <ul className={styles.cardLists}>
+                    {!showEvents && matchedData && (
+                      <DetailListCard place={matchedData} defaultOpen={true} />
+                    )}
 
-            {showEvents
-              ? placeDetailInfo &&
-                placeDetailInfo.EVENT_STTS.map(event => (
-                  <EventListCard key={event.EVENT_NM} event={event} />
-                ))
-              : hotPlaceLists.map((place, index) => (
-                  <div key={index}>
-                    <p className={styles.ageGroup}>
-                      <strong className={`${styles[`age${index + 1}0`]}`}>{index + 1}0대</strong>가
-                      가장 많이 방문했어요!
-                    </p>
-                    <DetailListCard place={place} defaultOpen={false} />
-                  </div>
-                ))}
-          </ul>
+                    {showEvents
+                      ? placeDetailInfo &&
+                        placeDetailInfo.EVENT_STTS.map(event => (
+                          <EventListCard key={event.EVENT_NM} event={event} />
+                        ))
+                      : hotPlaceLists.map((place, index) => (
+                          <div key={index}>
+                            <p className={styles.ageGroup}>
+                              <strong className={`${styles[`age${index + 1}0`]}`}>
+                                {index + 1}0대
+                              </strong>
+                              가 가장 많이 방문했어요!
+                            </p>
+                            <DetailListCard place={place} defaultOpen={false} />
+                          </div>
+                        ))}
+                  </ul>
+                </>
+              }
+            />
+            <Route path='/mypage' element={<MyPage />} />
+          </Routes>
         </div>
         <div className={styles.kakaoMapCon}>
           <KakaoMap placeLists={placeLists.row} />
