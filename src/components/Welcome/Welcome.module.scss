@@ -5,6 +5,7 @@
   flex-direction: column;
   padding: $padding-default;
   gap: $padding-thin;
+  height: 15%;
 
   h2 {
     @include h2-styles;
