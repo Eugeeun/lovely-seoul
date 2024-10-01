@@ -19,10 +19,8 @@ const getAllPlaceListUrl =
 
 /**
  * TODO
- * 2. 좋아요
  * 3. 리스트 클릭 카카오맵에 반영
  * 4. 검색
- * 5. 마이페이지
  */
 
 function App() {
@@ -31,7 +29,7 @@ function App() {
   const { placeDetailInfo } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { isLoginModalOpen, setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
     setIsLoginModalOpen(!localStorage.getItem('userInfo'));
@@ -68,7 +66,7 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <Header handleMatchedData={setMatchedData} />
+      <Header handleMatchedData={setMatchedData} handleModalOpen={setIsLoginModalOpen} />
       <div className={styles.contentsCon}>
         <div className={styles.listCon}>
           <Welcome />
@@ -103,7 +101,7 @@ function App() {
                 </>
               }
             />
-            <Route path='/mypage' element={<MyPage />} />
+            <Route path='/mypage' element={<MyPage handleModalOpen={setIsLoginModalOpen} />} />
           </Routes>
         </div>
         <div className={styles.kakaoMapCon}>
