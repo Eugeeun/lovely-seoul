@@ -15,7 +15,7 @@ const Welcome = () => {
   }, [setSavedUserInfo]);
 
   const welcomeMsgFactory = () => {
-    if (placeDetailInfo) {
+    if (location.pathname === '/detailpage' && placeDetailInfo) {
       return {
         front: '',
         strong: placeDetailInfo.AREA_NM,
