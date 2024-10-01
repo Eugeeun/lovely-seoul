@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
+import useStore from '../../store';
 
-const Header = () => {
+const Header = ({ handleMatchedData }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const { setSelectedPlace, setPlaceDetailInfo } = useStore();
 
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
@@ -13,10 +17,25 @@ const Header = () => {
     console.log(searchTerm);
   };
 
+  const handleLogoClick = e => {
+    console.log('logo clicked!');
+    navigate('/');
+    setSelectedPlace(null);
+    setPlaceDetailInfo(null);
+    handleMatchedData(null);
+  };
+
+  // TODO
+  // 카카오맵 서울시청을 중앙으로
+  // 오버레이 닫기
+
+  // TODO
+  // 마이페이지 기능 추가
+
   return (
     <div className={styles.header}>
       <div className={styles.logoAndSearchCon}>
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={handleLogoClick}>
           <img src='/logo.svg' alt='' />
         </div>
         <form onSubmit={handleSubmit}>
@@ -26,7 +45,7 @@ const Header = () => {
           </button>
         </form>
       </div>
-      <div className={styles.likeBtnCon}>
+      <div className={styles.likeBtnCon} onClick={() => navigate('/mypage')}>
         <div className={styles.likeBtn}>
           <svg
             width='24'
