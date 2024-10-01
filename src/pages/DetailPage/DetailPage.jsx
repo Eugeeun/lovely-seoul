@@ -21,6 +21,10 @@ const DetailPage = () => {
     }
   }, [placeDetailInfo]);
 
+  // TODO
+  // EventButtons도 높이를 지정해주어야 함 아니면 position absolute로 지정
+  // 문화 행사 목록도 없으면 사용자에게 알려주어야 함
+
   return (
     <>
       {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
