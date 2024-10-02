@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Popup.module.scss';
 
 const Popup = ({ title, handleClose }) => {
@@ -13,6 +13,11 @@ const Popup = ({ title, handleClose }) => {
       </button>
     </div>
   );
+};
+
+Popup.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Popup;

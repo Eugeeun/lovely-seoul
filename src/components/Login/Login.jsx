@@ -2,6 +2,7 @@ import useForm from '../../hooks/useForm';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import styles from './Login.module.scss';
 import useStore from '../../store';
+import PropTypes from 'prop-types';
 
 const Login = ({ handleClose }) => {
   const { values, errors, handleChange, handleSubmit } = useForm({
@@ -51,6 +52,10 @@ const Login = ({ handleClose }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Login;

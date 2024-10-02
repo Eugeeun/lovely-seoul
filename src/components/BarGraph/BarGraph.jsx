@@ -1,7 +1,7 @@
-import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { colorMapping } from './color';
 import styles from './BarGraph.module.scss';
+import PropTypes from 'prop-types';
 
 const BarGraph = ({ data }) => {
   return (
@@ -9,14 +9,7 @@ const BarGraph = ({ data }) => {
       <div className={styles.barGraph}>
         <ResponsiveBar
           data={data}
-          keys={[
-            'PPLTN_RATE_10',
-            'PPLTN_RATE_20',
-            'PPLTN_RATE_30',
-            'PPLTN_RATE_40',
-            'PPLTN_RATE_50',
-            'PPLTN_RATE_60',
-          ]}
+          keys={['10대', '20대', '30대', '40대', '50대', '60대']}
           indexBy='label'
           layout='horizontal' // 가로 방향
           colors={({ id }) => colorMapping[id]} // 색상 매핑
@@ -35,12 +28,26 @@ const BarGraph = ({ data }) => {
                 backgroundColor: colorMapping[key],
               }}
             />
-            <span>{key.replace('PPLTN_RATE_', '')}대</span>
+            <span>{key}</span>
           </div>
         ))}
       </div>
     </div>
   );
+};
+
+BarGraph.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      '10대': PropTypes.number.isRequired,
+      '20대': PropTypes.number.isRequired,
+      '30대': PropTypes.number.isRequired,
+      '40대': PropTypes.number.isRequired,
+      '50대': PropTypes.number.isRequired,
+      '60대': PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default BarGraph;
