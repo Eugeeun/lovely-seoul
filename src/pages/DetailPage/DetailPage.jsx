@@ -5,10 +5,9 @@ import DetailListCard from '../../components/ListCard/DetailListCard';
 import EventListCard from '../../components/ListCard/EventListCard';
 import { useState, useEffect } from 'react';
 import useSortedHotPlaceLists from '../../hooks/useSortedHotPlaceLists';
-import data from '../../../data.json';
 
 const DetailPage = () => {
-  const { placeDetailInfo } = useStore();
+  const { placeDetailInfo, allPlaceLists } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
   const sortedHotPlaceLists = useSortedHotPlaceLists();
@@ -16,7 +15,7 @@ const DetailPage = () => {
   // 선택된 마커의 상세정보를 리스트로 표시
   useEffect(() => {
     if (placeDetailInfo) {
-      const matched = data.find(item => item.area_nm === placeDetailInfo.AREA_NM);
+      const matched = allPlaceLists.find(item => item.area_nm === placeDetailInfo.AREA_NM);
       setMatchedData(matched);
     }
   }, [placeDetailInfo]);
