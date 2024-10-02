@@ -10,11 +10,11 @@ const useSortedHotPlaceLists = () => {
   }, [hotPlaceLists]);
 
   useEffect(() => {
-    const ageGroupIndex = savedUserInfo?.age ? Math.floor(savedUserInfo.age / 10) : null;
+    const ageGroupIndex = savedUserInfo?.age ? Math.floor(savedUserInfo.age / 10) - 1 : null;
     const newSortedHotPlaceLists = [...hotPlaceLists];
 
     if (ageGroupIndex !== null && ageGroupIndex < newSortedHotPlaceLists.length) {
-      const [targetPlace] = newSortedHotPlaceLists.splice(ageGroupIndex - 1, 1);
+      const [targetPlace] = newSortedHotPlaceLists.splice(ageGroupIndex, 1);
       newSortedHotPlaceLists.unshift(targetPlace);
     }
 
