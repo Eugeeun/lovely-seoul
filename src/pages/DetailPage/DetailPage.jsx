@@ -23,7 +23,7 @@ const DetailPage = () => {
   return (
     <>
       {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
-      <ul className={styles.cardLists}>
+      <ul className={`${styles.cardLists} ${placeDetailInfo ? styles.detail : ''}`}>
         {!showEvents && matchedData && <DetailListCard place={matchedData} defaultOpen={true} />}
 
         {showEvents
