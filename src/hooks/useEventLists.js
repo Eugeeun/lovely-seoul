@@ -11,7 +11,6 @@ const useEventLists = () => {
     try {
       const data = await ky.get(apiUrl).json();
       setPlaceDetailInfo(data['CITYDATA']);
-      console.log(data['CITYDATA']);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

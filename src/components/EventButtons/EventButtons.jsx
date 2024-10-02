@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './EventButtons.module.scss';
 
 const EventButtons = ({ setShowEvents }) => {
@@ -14,6 +14,10 @@ const EventButtons = ({ setShowEvents }) => {
       </button>
     </div>
   );
+};
+
+EventButtons.propTypes = {
+  setShowEvents: PropTypes.func.isRequired,
 };
 
 export default EventButtons;

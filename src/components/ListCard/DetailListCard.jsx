@@ -27,7 +27,7 @@ const DetailListCard = ({ place, defaultOpen }) => {
     {
       label: '연령별 비율',
       ...ageGroups.reduce((acc, age) => {
-        acc[`PPLTN_RATE_${age}`] = agePercentages[ageGroups.indexOf(age)];
+        acc[`${age}대`] = agePercentages[ageGroups.indexOf(age)];
         return acc;
       }, {}),
     },
@@ -55,13 +55,7 @@ const DetailListCard = ({ place, defaultOpen }) => {
             </p>
           </div>
           <BarGraph data={data} />
-          <div
-            className={styles.closeUpBtn}
-            onClick={() => {
-              console.log('clicked!');
-              setIsOpen(false);
-            }}
-          >
+          <div className={styles.closeUpBtn} onClick={() => setIsOpen(false)}>
             <img src='/closeUpBtn.svg' alt='' />
           </div>
         </>
@@ -75,6 +69,8 @@ DetailListCard.propTypes = {
     area_nm: PropTypes.string.isRequired,
     area_congest_num: PropTypes.number.isRequired,
     address: PropTypes.string.isRequired,
+    x: PropTypes.string.isRequired,
+    y: PropTypes.string.isRequired,
     population: PropTypes.shape({
       AREA_CONGEST_MSG: PropTypes.string.isRequired,
       MALE_PPLTN_RATE: PropTypes.string.isRequired,

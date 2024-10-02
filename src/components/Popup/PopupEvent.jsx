@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Popup.module.scss';
 
 const PopupEvent = ({ info, handleClose }) => {
@@ -14,6 +14,15 @@ const PopupEvent = ({ info, handleClose }) => {
       </button>
     </div>
   );
+};
+
+PopupEvent.propTypes = {
+  info: PropTypes.shape({
+    THUMBNAIL: PropTypes.string.isRequired,
+    EVENT_NM: PropTypes.string.isRequired,
+    URL: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default PopupEvent;
