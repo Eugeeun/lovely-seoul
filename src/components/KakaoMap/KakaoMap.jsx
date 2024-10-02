@@ -21,6 +21,12 @@ const KakaoMap = ({ placeLists }) => {
   const zoomIn = () => setMapLevel(Math.max(mapLevel - 1, 1));
   const zoomOut = () => setMapLevel(Math.min(mapLevel + 1, 14));
 
+  /**
+   * 마커를 클릭하면 해당 장소로 업데이트
+   * 마커를 중앙으로 이동하고 화면을 키움
+   * 마커 주변의 문화 행사를 업데이트
+   * detailpage로 이동
+   */
   const handlePlaceMarkerClick = marker => {
     clearSelectedEvent();
     setSelectedPlace(marker);

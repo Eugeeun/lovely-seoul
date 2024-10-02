@@ -13,6 +13,7 @@ const DetailPage = () => {
   const [matchedData, setMatchedData] = useState(null);
   const sortedHotPlaceLists = useSortedHotPlaceLists();
 
+  // 선택된 마커의 상세정보를 리스트로 표시
   useEffect(() => {
     if (placeDetailInfo) {
       const matched = data.find(item => item.area_nm === placeDetailInfo.AREA_NM);

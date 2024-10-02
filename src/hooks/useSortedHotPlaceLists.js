@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useStore from '../store';
 
+// 로그인 되어있는 유저라면 그 나이대에 맞는 핫플을 맨 위로 보이게 하는 훅
 const useSortedHotPlaceLists = () => {
   const { hotPlaceLists, savedUserInfo } = useStore();
   const [sortedHotPlaceLists, setSortedHotPlaceLists] = useState([]);

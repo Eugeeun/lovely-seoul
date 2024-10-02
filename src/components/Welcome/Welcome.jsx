@@ -8,11 +8,17 @@ const Welcome = () => {
   const { savedUserInfo, setSavedUserInfo, placeDetailInfo, savedSearchTerm } = useStore();
   const location = useLocation();
 
+  /**
+   * 로컬스토리지에 유저가 저장되어있다면 상태 업데이트
+   */
   useEffect(() => {
     const storedUserInfo = getItem('userInfo');
     if (storedUserInfo) setSavedUserInfo(storedUserInfo);
   }, [setSavedUserInfo]);
 
+  /**
+   * 현재 상태에 따른 Welcome 메세지 변화
+   */
   const getMessage = () => {
     if (location.pathname === '/detailpage' && placeDetailInfo) {
       return {

@@ -17,6 +17,11 @@ const Header = () => {
 
   const handleInputChange = e => setSearchTerm(e.target.value);
 
+  /**
+   * 빈문자로 검색하지 않는다면 searchpage로 이동
+   * 검색어는 전역으로 관리 => Welcome 컴포넌트에서 사용
+   * 검색창은 빈칸으로 재설정
+   */
   const handleSubmit = e => {
     e.preventDefault();
     if (searchTerm.length < 1) return;
@@ -25,6 +30,11 @@ const Header = () => {
     setSearchTerm('');
   };
 
+  /**
+   * 로고를 클릭하면 루트 페이지로 돌아감
+   * 선택된 장소를 제거
+   * 카카오맵을 중앙으로 설정
+   */
   const handleLogoClick = () => {
     navigate('/');
     setSelectedPlace(null);
@@ -33,6 +43,10 @@ const Header = () => {
     setMapLevel(6);
   };
 
+  /**
+   * 로그인 되었다면 mypage로 이동
+   * 로그인 되어있지 않다면 로그인 모달 오픈
+   */
   const handleLikeBtnClick = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     userInfo ? navigate('/mypage') : setIsLoginModalOpen(true);

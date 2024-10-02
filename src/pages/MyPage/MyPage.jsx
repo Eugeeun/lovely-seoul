@@ -2,9 +2,6 @@ import { useState } from 'react';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 import styles from '../common.module.scss';
 
-// TODO
-// 새로고침하면 오류나는 거 디버그
-
 const MyPage = () => {
   const [likedPlaces] = useState(() => JSON.parse(localStorage.getItem('likedPlaces')) || {});
 
