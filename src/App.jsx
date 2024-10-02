@@ -38,7 +38,7 @@ function App() {
           },
           { popRate: 0 }
         ).place;
-      });
+      }).map((maxVisitPlace, index) => ({ ...maxVisitPlace, index: index + 1 }));
 
       setHotPlaceLists(maxVisitPlaces);
     }
