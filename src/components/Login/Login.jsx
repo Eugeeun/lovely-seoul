@@ -34,7 +34,7 @@ const Login = ({ handleClose }) => {
         <div>
           <select id='age' name='age' value={values.age} onChange={handleChange}>
             <option value=''>나이를 선택하세요</option>
-            {[10, 20, 30, 40, 50].map(age => (
+            {[10, 20, 30, 40, 50, 60].map(age => (
               <option key={age} value={age}>
                 {age}대
               </option>
