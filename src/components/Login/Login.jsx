@@ -5,10 +5,7 @@ import useStore from '../../store';
 import PropTypes from 'prop-types';
 
 const Login = ({ handleClose }) => {
-  const { values, errors, handleChange, handleSubmit } = useForm({
-    name: '',
-    age: '',
-  });
+  const { values, errors, handleChange, handleSubmit } = useForm({ name: '', age: '' });
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', { name: '', age: '' });
   const { setSavedUserInfo } = useStore();
 
@@ -37,18 +34,18 @@ const Login = ({ handleClose }) => {
         <div>
           <select id='age' name='age' value={values.age} onChange={handleChange}>
             <option value=''>나이를 선택하세요</option>
-            <option value='10'>10대</option>
-            <option value='20'>20대</option>
-            <option value='30'>30대</option>
-            <option value='40'>40대</option>
-            <option value='50'>50대</option>
+            {[10, 20, 30, 40, 50].map(age => (
+              <option key={age} value={age}>
+                {age}대
+              </option>
+            ))}
           </select>
           {errors.age && <span className={styles.error}>{errors.age}</span>}
         </div>
         <button type='submit'>Continue</button>
       </form>
       <div className={styles.closeBtn} onClick={handleClose}>
-        <img src='/closeBtn.svg' alt='' />
+        <img src='/closeBtn.svg' alt='Close' />
       </div>
     </div>
   );
