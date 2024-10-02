@@ -11,6 +11,7 @@ const ListCard = ({ place, age, handleClick }) => {
   const [isLiked, setIsLiked] = useState(false);
   const { setIsLoginModalOpen } = useStore();
 
+  // 로드될 때 이미 좋아요를 누른 항목이라면 좋아요 표시로 업데이트
   useEffect(() => {
     const savedLikedPlaces = getItem(LIKED_PLACES_KEY) || {};
     if (savedLikedPlaces[place.area_nm]) {
@@ -18,6 +19,8 @@ const ListCard = ({ place, age, handleClick }) => {
     }
   }, [place.area_nm]);
 
+  // 좋아요를 누르면 로컬스토리지에 업데이트
+  // 좋아요를 취소하면 로컬스토리지에서 삭제
   useEffect(() => {
     const savedLikedPlaces = getItem(LIKED_PLACES_KEY) || {};
     const updatedLikedPlaces = isLiked
@@ -30,6 +33,7 @@ const ListCard = ({ place, age, handleClick }) => {
     setItem(LIKED_PLACES_KEY, updatedLikedPlaces);
   }, [isLiked, place]);
 
+  // 좋아요 버튼을 눌렀는데 로그인이 되어있지 않으면 로그인 모달 오픈
   const handleLIkeClick = e => {
     e.stopPropagation();
     if (!getItem(USER_INFO_KEY)) setIsLoginModalOpen(true);
