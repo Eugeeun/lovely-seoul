@@ -25,7 +25,7 @@ const Welcome = () => {
     if (location.pathname === '/mypage') {
       return {
         front: '',
-        strong: `${savedUserInfo.name}님이 `,
+        strong: `${savedUserInfo?.name}님이 `,
         back: '찜한 목록이에요!',
         desc: '저희가 한눈에 보실 수 있도록 모아봤어요!',
       };
