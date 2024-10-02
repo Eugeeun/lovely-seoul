@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { detailPlaceLists } from '../utils/detailPlaceLists';
 import useStore from '../store';
 
+// 핫플 추출 훅
+// 방문 인구 비율로 정렬 후 연령별로 상위 1개씩 배열로 만들어 리턴
 const useMaxVisitPlaces = placeLists => {
   const { setAllPlaceLists, setHotPlaceLists } = useStore();
 
