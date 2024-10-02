@@ -15,9 +15,7 @@ const Header = () => {
     setSavedSearchTerm,
   } = useStore();
 
-  const handleInputChange = e => {
-    setSearchTerm(e.target.value);
-  };
+  const handleInputChange = e => setSearchTerm(e.target.value);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -30,20 +28,13 @@ const Header = () => {
     navigate('/');
     setSelectedPlace(null);
     setPlaceDetailInfo(null);
-    setMapCenter({
-      lat: 37.5665,
-      lng: 126.978,
-    });
+    setMapCenter({ lat: 37.5665, lng: 126.978 });
     setMapLevel(6);
   };
 
   const handleLikeBtnClick = () => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
-    if (!userInfo) {
-      setIsLoginModalOpen(true);
-    } else {
-      navigate('/mypage');
-    }
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    userInfo ? navigate('/mypage') : setIsLoginModalOpen(true);
   };
 
   return (
@@ -61,21 +52,7 @@ const Header = () => {
       </div>
       <div className={styles.likeBtnCon} onClick={handleLikeBtnClick}>
         <div className={styles.likeBtn}>
-          <svg
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M12.5098 20.8101C12.1807 20.9301 11.6388 20.9301 11.3097 20.8101C8.50317 19.8201 2.23193 15.6901 2.23193 8.6901C2.23193 5.6001 4.64171 3.1001 7.61281 3.1001C9.37418 3.1001 10.9323 3.9801 11.9098 5.3401C12.8872 3.9801 14.455 3.1001 16.2067 3.1001C19.1778 3.1001 21.5876 5.6001 21.5876 8.6901C21.5876 15.6901 15.3164 19.8201 12.5098 20.8101Z'
-              stroke='#ffffff'
-              strokeWidth='1.5'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </svg>
+          <img src='/likeIcon.svg' alt='' />
         </div>
         <span>MY</span>
       </div>
