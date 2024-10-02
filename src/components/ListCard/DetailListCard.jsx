@@ -8,21 +8,17 @@ import useStore from '../../store';
 const DetailListCard = ({ place, defaultOpen }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const { setMapCenter, setMapLevel } = useStore();
-
   const leastTime = useMemo(() => {
-    const sortedTime = place.population.FCST_PPLTN.map(item => ({ ...item }));
-    sortedTime.sort((a, b) => parseInt(a.FCST_PPLTN_MAX) - parseInt(b.FCST_PPLTN_MAX));
+    const sortedTime = [...place.population.FCST_PPLTN].sort(
+      (a, b) => parseInt(a.FCST_PPLTN_MAX) - parseInt(b.FCST_PPLTN_MAX)
+    );
     return sortedTime[0].FCST_TIME.split(' ')[1].split(':')[0];
   }, [place.population.FCST_PPLTN]);
 
-  // 연령대 비율 계산
   const ageGroups = ['10', '20', '30', '40', '50', '60'];
   const agePercentages = ageGroups.map(age => parseFloat(place.population[`PPLTN_RATE_${age}`]));
-
-  // 가장 높은 비율의 연령대 찾기
   const maxAgeIndex = agePercentages.indexOf(Math.max(...agePercentages));
   const maxAgeGroup = ageGroups[maxAgeIndex];
-
   const data = [
     {
       label: '연령별 비율',

@@ -2,38 +2,38 @@ import PropTypes from 'prop-types'; // PropTypes 임포트
 import styles from './ListCard.module.scss';
 import { useEffect, useState } from 'react';
 import useStore from '../../store';
+import { setItem, getItem } from '../../utils/localStorageUtils';
+
+const LIKED_PLACES_KEY = 'likedPlaces';
+const USER_INFO_KEY = 'userInfo';
 
 const ListCard = ({ place, age, handleClick }) => {
   const [isLiked, setIsLiked] = useState(false);
   const { setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
-    const savedLikedPlaces = JSON.parse(localStorage.getItem('likedPlaces')) || {};
+    const savedLikedPlaces = getItem(LIKED_PLACES_KEY) || {};
     if (savedLikedPlaces[place.area_nm]) {
       setIsLiked(true);
     }
   }, [place.area_nm]);
 
   useEffect(() => {
-    const savedLikedPlaces = JSON.parse(localStorage.getItem('likedPlaces')) || {};
+    const savedLikedPlaces = getItem(LIKED_PLACES_KEY) || {};
+    const updatedLikedPlaces = isLiked
+      ? { ...savedLikedPlaces, [place.area_nm]: place }
+      : Object.keys(savedLikedPlaces).reduce((acc, key) => {
+          if (key !== place.area_nm) acc[key] = savedLikedPlaces[key];
+          return acc;
+        }, {});
 
-    if (isLiked) {
-      // 좋아요 누르면 로컬스토리지에 저장
-      const newLikedPlaces = { ...savedLikedPlaces, [place.area_nm]: place };
-      localStorage.setItem('likedPlaces', JSON.stringify(newLikedPlaces));
-    } else {
-      // 좋아요를 취소하면 로컬스토리지에서 제거
-      const { [place.area_nm]: _, ...remainingLikedPlaces } = savedLikedPlaces;
-      localStorage.setItem('likedPlaces', JSON.stringify(remainingLikedPlaces));
-    }
+    setItem(LIKED_PLACES_KEY, updatedLikedPlaces);
   }, [isLiked, place]);
 
   const handleLIkeClick = e => {
     e.stopPropagation();
-    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
-    if (!userInfo) {
-      setIsLoginModalOpen(true);
-    } else setIsLiked(!isLiked);
+    if (!getItem(USER_INFO_KEY)) setIsLoginModalOpen(true);
+    else setIsLiked(!isLiked);
   };
 
   return (
@@ -94,7 +94,6 @@ const ListCard = ({ place, age, handleClick }) => {
   );
 };
 
-// PropTypes 설정
 ListCard.propTypes = {
   place: PropTypes.shape({
     area_nm: PropTypes.string.isRequired,

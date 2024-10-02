@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import styles from './EventButtons.module.scss';
 
-const EventButtons = ({ setShowEvents }) => {
-  return (
-    <div className={styles.buttonCon}>
-      <button onClick={() => setShowEvents(false)} className={styles.button}>
-        <img src='/place-pin.png' alt='현재 장소' />
-        <span>현재 장소</span>
+const buttons = [
+  { label: '현재 장소', imgSrc: '/place-pin.png', onClick: false },
+  { label: '주변 문화 행사', imgSrc: '/event-pin.png', onClick: true },
+];
+
+const EventButtons = ({ setShowEvents }) => (
+  <div className={styles.buttonCon}>
+    {buttons.map(({ label, imgSrc, onClick }) => (
+      <button key={label} onClick={() => setShowEvents(onClick)} className={styles.button}>
+        <img src={imgSrc} alt={label} />
+        <span>{label}</span>
       </button>
-      <button onClick={() => setShowEvents(true)} className={styles.button}>
-        <img src='/event-pin.png' alt='주변 문화 행사' />
-        <span>주변 문화 행사</span>
-      </button>
-    </div>
-  );
-};
+    ))}
+  </div>
+);
 
 EventButtons.propTypes = {
   setShowEvents: PropTypes.func.isRequired,

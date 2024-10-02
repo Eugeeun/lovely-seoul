@@ -2,19 +2,18 @@ import styles from './Welcome.module.scss';
 import useStore from '../../store';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getItem } from '../../utils/localStorageUtils';
 
 const Welcome = () => {
   const { savedUserInfo, setSavedUserInfo, placeDetailInfo, savedSearchTerm } = useStore();
   const location = useLocation();
 
   useEffect(() => {
-    const storedUserInfo = localStorage.getItem('userInfo');
-    if (storedUserInfo) {
-      setSavedUserInfo(JSON.parse(storedUserInfo));
-    }
+    const storedUserInfo = getItem('userInfo');
+    if (storedUserInfo) setSavedUserInfo(storedUserInfo);
   }, [setSavedUserInfo]);
 
-  const welcomeMsgFactory = () => {
+  const getMessage = () => {
     if (location.pathname === '/detailpage' && placeDetailInfo) {
       return {
         front: '',
@@ -22,37 +21,36 @@ const Welcome = () => {
         back: '은 지금!',
         desc: '가장 한산한 시간대를 확인해보세요!',
       };
-    } else if (location.pathname === '/mypage') {
+    }
+    if (location.pathname === '/mypage') {
       return {
-        front: ``,
-        strong: `${savedUserInfo.name}님이 `,
-        back: `찜한 목록이에요!`,
-        desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
-      };
-    } else if (location.pathname === '/searchpage') {
-      return {
-        front: ``,
-        strong: `${savedSearchTerm}(으)로 `,
-        back: `검색한 결과에요!`,
-        desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
-      };
-    } else if (savedUserInfo) {
-      return {
-        front: `${savedUserInfo.name}님! 현재 ${savedUserInfo.age}대에게 `,
-        strong: `인기가 많은 `,
-        back: `곳이에요!`,
-        desc: `저희가 한눈에 보실 수 있도록 모아봤어요!`,
-      };
-    } else {
-      return {
-        front: `현재 가장 `,
-        strong: `인기가 많은 `,
-        back: `곳이에요!`,
+        front: '',
+        strong: `${savedUserInfo?.name}님이 `,
+        back: '찜한 목록이에요!',
         desc: '저희가 한눈에 보실 수 있도록 모아봤어요!',
       };
     }
+    if (location.pathname === '/searchpage') {
+      return {
+        front: '',
+        strong: `${savedSearchTerm}(으)로 `,
+        back: '검색한 결과에요!',
+        desc: '저희가 한눈에 보실 수 있도록 모아봤어요!',
+      };
+    }
+
+    const userGreeting = savedUserInfo
+      ? `${savedUserInfo.name}님! 현재 ${savedUserInfo.age}대에게  `
+      : `현재 가장 `;
+    return {
+      front: userGreeting,
+      strong: '인기가 많은 ',
+      back: '곳이에요!',
+      desc: '저희가 한눈에 보실 수 있도록 모아봤어요!',
+    };
   };
-  const { front, strong, back, desc } = welcomeMsgFactory();
+
+  const { front, strong, back, desc } = getMessage();
 
   return (
     <div className={styles.welcomeCon}>

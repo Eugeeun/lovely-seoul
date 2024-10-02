@@ -4,16 +4,15 @@ import EventButtons from '../../components/EventButtons/EventButtons';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 import EventListCard from '../../components/ListCard/EventListCard';
 import { useState, useEffect } from 'react';
+import useSortedHotPlaceLists from '../../hooks/useSortedHotPlaceLists';
 import data from '../../../data.json';
 
 const DetailPage = () => {
   const { placeDetailInfo } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-  const { hotPlaceLists } = useStore();
+  const sortedHotPlaceLists = useSortedHotPlaceLists();
 
-  // TODO
-  // 추후에는 data가 아니라 전역 상태 관리하고 있는 allPlaceLists에서 불러와서 결정
   useEffect(() => {
     if (placeDetailInfo) {
       const matched = data.find(item => item.area_nm === placeDetailInfo.AREA_NM);
@@ -21,14 +20,10 @@ const DetailPage = () => {
     }
   }, [placeDetailInfo]);
 
-  // TODO
-  // EventButtons도 높이를 지정해주어야 함 아니면 position absolute로 지정
-  // 문화 행사 목록도 없으면 사용자에게 알려주어야 함
-
   return (
     <>
       {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
-      <ul className={styles.cardLists}>
+      <ul className={`${styles.cardLists} ${placeDetailInfo ? styles.detail : ''}`}>
         {!showEvents && matchedData && <DetailListCard place={matchedData} defaultOpen={true} />}
 
         {showEvents
@@ -36,11 +31,11 @@ const DetailPage = () => {
             placeDetailInfo.EVENT_STTS.map(event => (
               <EventListCard key={event.EVENT_NM} event={event} />
             ))
-          : hotPlaceLists.map((place, index) => (
+          : sortedHotPlaceLists.map((place, index) => (
               <div key={index}>
                 <p className={styles.ageGroup}>
-                  <strong className={`${styles[`age${index + 1}0`]}`}>{index + 1}0대</strong>가 가장
-                  많이 방문했어요!
+                  <strong className={`${styles[`age${place.index}0`]}`}>{place.index}0대</strong>가
+                  가장 많이 방문했어요!
                 </p>
                 <DetailListCard place={place} defaultOpen={false} />
               </div>

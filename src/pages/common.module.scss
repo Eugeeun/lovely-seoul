@@ -13,6 +13,10 @@
     display: none;
   }
 
+  &.detail {
+    height: 93%;
+  }
+
   .ageGroup {
     @include p-styles;
     padding: $padding-thin $padding-thicker;
