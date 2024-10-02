@@ -19,6 +19,7 @@ const Header = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (searchTerm.length < 1) return;
     setSavedSearchTerm(searchTerm);
     navigate('/searchpage');
     setSearchTerm('');
