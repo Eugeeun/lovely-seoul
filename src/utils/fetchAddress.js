@@ -1,3 +1,4 @@
+// 좌표를 주소명으로 변환 후 리턴
 export const fetchAddress = (geocoder, x, y) =>
   new Promise((resolve, reject) => {
     geocoder.coord2Address(y, x, (result, status) => {
