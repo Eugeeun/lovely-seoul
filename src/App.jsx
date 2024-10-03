@@ -14,11 +14,8 @@ import MainPage from './pages/MainPage/MainPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import useMaxVisitPlaces from './hooks/useMaxVisitPlaces';
 
-const getAllPlaceListUrl =
-  'https://data.seoul.go.kr/SeoulRtd/getCategoryList?page=1&category=%EC%A0%84%EC%B2%B4%EB%B3%B4%EA%B8%B0&count=all&sort=true';
-
 function App() {
-  const { data: placeLists, error, isLoading } = useFetch(getAllPlaceListUrl);
+  const { data: placeLists, error, isLoading } = useFetch('getPlaceLists'); // 서버리스 함수 경로 사용
   const { isLoginModalOpen, setIsLoginModalOpen } = useStore();
 
   useEffect(() => {
