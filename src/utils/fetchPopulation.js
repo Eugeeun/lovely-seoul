@@ -1,10 +1,8 @@
 import ky from 'ky';
 
-// 장소명으로 인구 데이터 요청 후 리턴
+// 서버리스 함수를 호출해 인구 데이터를 가져오는 함수
 export const fetchPopulation = async placeName => {
-  const url = `http://openapi.seoul.go.kr:8088/${
-    import.meta.env.VITE_CITY_POP_API_KEY
-  }/json/citydata_ppltn/1/5/${placeName}`;
+  const url = `/api/fetchPopulation?placeName=${placeName}`;
   const result = await ky.get(url).json();
-  return result['SeoulRtd.citydata_ppltn'][0];
+  return result;
 };
