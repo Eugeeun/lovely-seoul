@@ -1,6 +1,7 @@
 # 러블리 서울
 
-배포 URL: https://lovely-seoul.vercel.app/
+배포 URL: https://lovely-seoul.vercel.app/  
+프로젝트 기획 및 진행 상황 URL: https://truth-flower-fa6.notion.site/2-6643b1378a28496c8856db614166b8c7
 
 ## 기능
 
