@@ -6,6 +6,7 @@
 ## 기능
 
 ### 헤더
+![image](https://github.com/user-attachments/assets/f17890a3-9ae5-4941-8673-91d1d36ac09c)
 
 1. 로고 클릭시 메인 페이지로 이동
 2. 검색
@@ -14,6 +15,7 @@
    - 로그인 되어있지 않다면 로그인 모달 표시
 
 ### 지도
+![image](https://github.com/user-attachments/assets/4055eb32-80a6-49dd-82c5-d1d1ba888209)
 
 1. 전체 리스트 마커 표시
 2. 지도 확대, 축소 기능
@@ -23,18 +25,24 @@
 
 ### 페이지 공통
 
-1. 로그인 되어있지 않다면 로그인 모달 표시
+1. 로그인 되어있지 않다면 로그인 모달 표시   
+![image](https://github.com/user-attachments/assets/2f479db5-51b5-4aee-a5c4-0607ed66c311)
+
 2. 장소 찜 기능
    - 로그인 되어있지 않다면 로그인 모달 표시
 3. 장소 리스트 클릭시 장소 상세 정보 보기 기능
    - 접혀진 상태라면 해당 장소를 지도 가운데에 표시
 
 ### 메인 페이지
+![image](https://github.com/user-attachments/assets/c3fd4fd6-7a8d-4dcd-810e-55a93846e3f5)
+
 
 1. 현재 연령별 핫플 추천
    - 로그인 되어있다면 해당 연령대 핫플이 상단에 노출
 
 ### 디테일 페이지
+![image](https://github.com/user-attachments/assets/7a42054a-c5d5-4909-b78e-9386c321a315)
+
 
 1. 선택된 장소 상단 노출 및 상세 정보 표시
    - 가장 한적한 시간
@@ -43,11 +51,15 @@
    - 리스트 클릭시 외부 사이트로 이동
 
 ### 마이 페이지
+![image](https://github.com/user-attachments/assets/70be7341-f099-4892-9e4a-770169fe93c3)
+
 
 1. 찜한 장소를 리스트로 표현
 2. 찜한 장소가 없으면 빈 리스트 대신 이미지 표시
 
 ### 검색 페이지
+![image](https://github.com/user-attachments/assets/03e398f7-3bdf-4e08-a564-1b63c938f469)
+
 
 1. 검색어 단어가 포함된 모든 장소 표시
 2. 검색어에 맞는 장소가 없으면 빈 리스트 대신 이미지 표시
