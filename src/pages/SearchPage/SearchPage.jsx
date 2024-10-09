@@ -4,7 +4,9 @@ import DetailListCard from '../../components/ListCard/DetailListCard';
 
 const SearchPage = () => {
   const { savedSearchTerm, allPlaceLists } = useStore();
-  const searchedPlaceLists = allPlaceLists.filter(place => place.area_nm.includes(savedSearchTerm));
+  const searchedPlaceLists = allPlaceLists.filter(
+    place => place.area_nm.includes(savedSearchTerm) || place.address.includes(savedSearchTerm)
+  );
 
   return (
     <ul className={styles.cardLists}>
