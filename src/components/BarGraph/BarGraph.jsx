@@ -15,6 +15,7 @@ const BarGraph = ({ data }) => (
         layout='horizontal'
         colors={({ id }) => colorMapping[id]}
         axisBottom={{ tickValues: [] }}
+        tooltip={() => null}
       />
     </div>
     <div className={styles.colorCon}>
