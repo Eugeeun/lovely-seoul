@@ -52,7 +52,7 @@ const Welcome = () => {
       front: userGreeting,
       strong: '인기가 많은 ',
       back: '곳이에요!',
-      desc: '저희가 한눈에 보실 수 있도록 모아봤어요!',
+      desc: '해당 장소에 인기 있는 연령대와 차이가 있을 수 있어요',
     };
   };
 
