@@ -4,42 +4,54 @@ import EventButtons from '../../components/EventButtons/EventButtons';
 import DetailListCard from '../../components/ListCard/DetailListCard';
 import EventListCard from '../../components/ListCard/EventListCard';
 import { useState, useEffect } from 'react';
-import useSortedHotPlaceLists from '../../hooks/useSortedHotPlaceLists';
+import Loading from './../../components/Loading/Loading';
+import { haversineDistance } from '../../utils/haversineDistance';
 
 const DetailPage = () => {
   const { placeDetailInfo, allPlaceLists } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-  const sortedHotPlaceLists = useSortedHotPlaceLists();
+
+  const [nearPlaces, setNearPlaces] = useState([]);
 
   // 선택된 마커의 상세정보를 리스트로 표시
   useEffect(() => {
-    if (placeDetailInfo) {
-      const matched = allPlaceLists.find(item => item.area_nm === placeDetailInfo.AREA_NM);
-      setMatchedData(matched);
-    }
-  }, [placeDetailInfo]);
+    if (!placeDetailInfo) return;
+
+    const matched = allPlaceLists.find(item => item.area_nm === placeDetailInfo.AREA_NM);
+    setMatchedData(matched);
+  }, [placeDetailInfo, allPlaceLists]);
+
+  // 현재 장소를 기준으로 가까운 순으로 정렬
+  useEffect(() => {
+    if (!matchedData) return;
+
+    setNearPlaces(() => {
+      return [...allPlaceLists].sort((a, b) => {
+        const distanceA = haversineDistance(matchedData, { x: a.x, y: a.y });
+        const distanceB = haversineDistance(matchedData, { x: b.x, y: b.y });
+
+        return distanceA - distanceB;
+      });
+    });
+  }, [matchedData, allPlaceLists]);
 
   return (
     <>
-      {placeDetailInfo && <EventButtons setShowEvents={setShowEvents} />}
+      {matchedData && <EventButtons setShowEvents={setShowEvents} />}
       <ul className={`${styles.cardLists} ${placeDetailInfo ? styles.detail : ''}`}>
+        {!matchedData && <Loading loading={true} />}
         {!showEvents && matchedData && <DetailListCard place={matchedData} defaultOpen={true} />}
 
         {showEvents
-          ? placeDetailInfo &&
-            placeDetailInfo.EVENT_STTS.map(event => (
+          ? placeDetailInfo.EVENT_STTS.map(event => (
               <EventListCard key={event.EVENT_NM} event={event} />
             ))
-          : sortedHotPlaceLists.map((place, index) => (
-              <div key={index}>
-                <p className={styles.ageGroup}>
-                  <strong className={`${styles[`age${place.index}0`]}`}>{place.index}0대</strong>가
-                  가장 많이 방문했어요!
-                </p>
-                <DetailListCard place={place} defaultOpen={false} />
-              </div>
-            ))}
+          : nearPlaces
+              .slice(1, 11)
+              .map((place, index) => (
+                <DetailListCard key={index} place={place} defaultOpen={false} />
+              ))}
       </ul>
     </>
   );
