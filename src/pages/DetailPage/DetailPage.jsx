@@ -11,7 +11,6 @@ const DetailPage = () => {
   const { placeDetailInfo, allPlaceLists } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
-
   const [nearPlaces, setNearPlaces] = useState([]);
 
   // 선택된 마커의 상세정보를 리스트로 표시
@@ -43,15 +42,24 @@ const DetailPage = () => {
         {!matchedData && <Loading loading={true} />}
         {!showEvents && matchedData && <DetailListCard place={matchedData} defaultOpen={true} />}
 
-        {showEvents
-          ? placeDetailInfo.EVENT_STTS.map(event => (
+        {showEvents ? (
+          placeDetailInfo.EVENT_STTS.length === 0 ? (
+            <div className={styles.noList}>
+              <div className={styles.noListImg}>
+                <img src='/noResult.svg' alt='' />
+              </div>
+              <p className={styles.desc}>주변 문화 행사가 없어요.</p>
+            </div>
+          ) : (
+            placeDetailInfo.EVENT_STTS.map(event => (
               <EventListCard key={event.EVENT_NM} event={event} />
             ))
-          : nearPlaces
-              .slice(1, 11)
-              .map((place, index) => (
-                <DetailListCard key={index} place={place} defaultOpen={false} />
-              ))}
+          )
+        ) : (
+          nearPlaces
+            .slice(1, 11)
+            .map((place, index) => <DetailListCard key={index} place={place} defaultOpen={false} />)
+        )}
       </ul>
     </>
   );
