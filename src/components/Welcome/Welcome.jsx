@@ -25,7 +25,7 @@ const Welcome = () => {
         front: '',
         strong: placeDetailInfo.AREA_NM,
         back: '은 지금!',
-        desc: '가장 한산한 시간대를 확인해보세요!',
+        desc: '주변 장소들도 확인해보세요!',
       };
     }
     if (location.pathname === '/mypage') {
