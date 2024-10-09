@@ -39,7 +39,7 @@ const DetailPage = () => {
     <>
       {matchedData && <EventButtons setShowEvents={setShowEvents} />}
       <ul className={`${styles.cardLists} ${placeDetailInfo ? styles.detail : ''}`}>
-        {!matchedData && <Loading loading={true} />}
+        <Loading loading={!matchedData} />
         {!showEvents && matchedData && <DetailListCard place={matchedData} defaultOpen={true} />}
 
         {showEvents ? (
