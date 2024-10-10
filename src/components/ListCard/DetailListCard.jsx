@@ -30,16 +30,13 @@ const DetailListCard = ({ place, defaultOpen }) => {
   ];
 
   // 리스트를 클릭했을 때 그 좌표에 해당하는 마커를 중앙으로 표시
-  // 리스트가 접혀있을 때만 동작
   const handleClick = () => {
     setIsOpen(true);
-    if (!isOpen) {
-      setMapCenter({
-        lat: place.x,
-        lng: place.y,
-      });
-      setMapLevel(2);
-    }
+    setMapCenter({
+      lat: place.x,
+      lng: place.y,
+    });
+    setMapLevel(2);
   };
 
   return (
