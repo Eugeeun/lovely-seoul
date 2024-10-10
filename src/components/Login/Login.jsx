@@ -17,7 +17,7 @@ const Login = ({ handleClose }) => {
 
   return (
     <div className={styles.loginCon}>
-      <span className={styles.title}>로그인</span>
+      <span className={styles.title}>어서오세요!</span>
       <p className={styles.desc}>간단한 정보를 입력하시면 좋은 정보를 추천해드릴게요!</p>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
         <div>
