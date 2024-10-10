@@ -8,7 +8,7 @@ import Loading from './../../components/Loading/Loading';
 import { haversineDistance } from '../../utils/haversineDistance';
 
 const DetailPage = () => {
-  const { placeDetailInfo, allPlaceLists } = useStore();
+  const { placeDetailInfo, allPlaceLists, setMapCenter } = useStore();
   const [showEvents, setShowEvents] = useState(false);
   const [matchedData, setMatchedData] = useState(null);
   const [nearPlaces, setNearPlaces] = useState([]);
@@ -19,7 +19,11 @@ const DetailPage = () => {
 
     const matched = allPlaceLists.find(item => item.area_nm === placeDetailInfo.AREA_NM);
     setMatchedData(matched);
-  }, [placeDetailInfo, allPlaceLists]);
+    setMapCenter({
+      lat: matched.x,
+      lng: matched.y,
+    });
+  }, [placeDetailInfo, allPlaceLists, setMapCenter]);
 
   // 현재 장소를 기준으로 가까운 순으로 정렬
   useEffect(() => {
