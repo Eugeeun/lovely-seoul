@@ -39,9 +39,13 @@
 
 1. 현재 연령별 핫플 추천
    - 로그인 되어있다면 해당 연령대 핫플이 상단에 노출
+   
+![image](https://github.com/user-attachments/assets/29f368e6-834d-4286-833a-0fc6e43291c6)
+
 
 ### 디테일 페이지
-![image](https://github.com/user-attachments/assets/7a42054a-c5d5-4909-b78e-9386c321a315)
+![image](https://github.com/user-attachments/assets/34b9efb7-6aa4-4644-a889-a84d3a4f6dcf)
+
 
 
 1. 선택된 장소 상단 노출 및 상세 정보 표시
@@ -49,6 +53,7 @@
    - 연령별 방문 비율
 2. 장소 주변 문화 행사 목록 표시
    - 리스트 클릭시 외부 사이트로 이동
+3. 선택된 장소와 가까운 주요 장소 10개 노출
 
 ### 마이 페이지
 ![image](https://github.com/user-attachments/assets/70be7341-f099-4892-9e4a-770169fe93c3)
