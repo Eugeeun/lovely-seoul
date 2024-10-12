@@ -6,8 +6,10 @@ import BarGraph from '../BarGraph/BarGraph';
 import useStore from '../../store';
 
 const DetailListCard = ({ place, defaultOpen }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(defaultOpen); // 상세정보 오픈 유무
   const { setMapCenter, setMapLevel } = useStore();
+
+  // 가장 한적한 시간 정렬
   const leastTime = useMemo(() => {
     const sortedTime = [...place.population.FCST_PPLTN].sort(
       (a, b) => parseInt(a.FCST_PPLTN_MAX) - parseInt(b.FCST_PPLTN_MAX)
@@ -15,10 +17,10 @@ const DetailListCard = ({ place, defaultOpen }) => {
     return sortedTime[0].FCST_TIME.split(' ')[1].split(':')[0];
   }, [place.population.FCST_PPLTN]);
 
-  const ageGroups = ['10', '20', '30', '40', '50', '60'];
+  const ageGroups = ['10', '20', '30', '40', '50', '60']; // 추출할 연령대
   const agePercentages = ageGroups.map(age => parseFloat(place.population[`PPLTN_RATE_${age}`]));
   const maxAgeIndex = agePercentages.indexOf(Math.max(...agePercentages));
-  const maxAgeGroup = ageGroups[maxAgeIndex];
+  const maxAgeGroup = ageGroups[maxAgeIndex]; // 가장 비율이 큰 연령대
   const data = [
     {
       label: '연령별 비율',

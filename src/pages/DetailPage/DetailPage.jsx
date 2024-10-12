@@ -17,8 +17,10 @@ const DetailPage = () => {
   useEffect(() => {
     if (!placeDetailInfo) return;
 
+    // 장소명을 통해 현재 선택된 마커의 정보를 표시
     const matched = allPlaceLists.find(item => item.area_nm === placeDetailInfo.AREA_NM);
     setMatchedData(matched);
+    // 지도의 중앙으로 이동
     setMapCenter({
       lat: matched.x,
       lng: matched.y,
